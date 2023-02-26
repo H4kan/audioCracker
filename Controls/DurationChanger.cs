@@ -21,24 +21,24 @@ namespace audioCracker.Controls
 
         private string currentString;
 
-        private Timer currentTimer;
+        private TimeManager timerManager;
 
         private Wavplayer player;
 
-        public DurationChanger(Wavplayer player, Label durationLabel, Label currentLabel) {
+        public DurationChanger(Wavplayer player, Label durationLabel, Label currentLabel, TimeManager timerManager)
+        {
             this.durationLabel = durationLabel;
             this.currentLabel = currentLabel;
             this.durationString = "00:00";
             this.currentString = "00:00";
             this.durationMs = 0;
             this.currentMs = 0;
-            this.currentTimer = new Timer();
 
-            this.currentTimer.Tick += new EventHandler(TimerTick);
-
-            this.currentTimer.Interval = 1000;
 
             this.player = player;
+            this.timerManager = timerManager;
+
+            this.timerManager.perSecondTimer.Tick += new EventHandler(TimerTick);
         }
 
         public void ChangeDuration(int durationMs)
@@ -50,7 +50,7 @@ namespace audioCracker.Controls
             this.durationString = $"{minutesDuration.ToString("D2")}:{secondsDuration.ToString("D2")}";
 
             this.durationLabel.Text = this.durationString;
-            this.currentTimer.Stop();
+            this.timerManager.perSecondTimer.Stop();
             this.ChangeCurrent(0);
         }
 
@@ -66,12 +66,12 @@ namespace audioCracker.Controls
 
         public void UnpauseCurrentTicker()
         {
-            this.currentTimer.Start();
+            this.timerManager.perSecondTimer.Start();
         }
 
         public void PauseCurrentTicker()
         {
-            this.currentTimer.Stop();
+            this.timerManager.perSecondTimer.Stop();
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace audioCracker.Controls
 
         public void ResetCurrentTicker()
         {
-            this.currentTimer.Stop();
+            this.timerManager.perSecondTimer.Stop();
             this.ChangeCurrent(0);
         }
 

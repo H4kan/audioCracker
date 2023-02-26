@@ -37,6 +37,7 @@
             this.durationLabel = new System.Windows.Forms.Label();
             this.stopButton = new System.Windows.Forms.Button();
             this.playButton = new System.Windows.Forms.Button();
+            this.dataPlot = new ScottPlot.FormsPlot();
             this.plotComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -83,6 +84,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.dataPlot);
             this.splitContainer1.Panel2.Controls.Add(this.plotComboBox);
             this.splitContainer1.Size = new System.Drawing.Size(1327, 662);
             this.splitContainer1.SplitterDistance = 445;
@@ -161,6 +163,17 @@
             this.playButton.UseVisualStyleBackColor = false;
             this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
+            // dataPlot
+            // 
+            this.dataPlot.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.dataPlot.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dataPlot.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.dataPlot.Location = new System.Drawing.Point(31, 82);
+            this.dataPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.dataPlot.Name = "dataPlot";
+            this.dataPlot.Size = new System.Drawing.Size(825, 576);
+            this.dataPlot.TabIndex = 2;
+            // 
             // plotComboBox
             // 
             this.plotComboBox.BackColor = System.Drawing.SystemColors.HighlightText;
@@ -204,5 +217,6 @@
         private Label currentLabel;
         private Label label1;
         private ComboBox plotComboBox;
+        private ScottPlot.FormsPlot dataPlot;
     }
 }

@@ -23,15 +23,17 @@ namespace audioCracker.Controls
         private Panel playPanel;
         private DurationChanger durationChanger;
         private int fileSequencer;
+        private TimeManager timeManager;
 
-        public Wavplayer(Button playButton, Button stopButton, Label durationLabel, Label currentLabel, Panel playPanel)
+        public Wavplayer(Button playButton, Button stopButton, Label durationLabel, Label currentLabel, Panel playPanel, TimeManager timeManager)
         {
             this.playButton = playButton;
             this.stopButton = stopButton;
             this.playPanel = playPanel;
             this.isAudioPlaying = false;
-            this.durationChanger = new DurationChanger(this, durationLabel, currentLabel);
+            this.durationChanger = new DurationChanger(this, durationLabel, currentLabel, timeManager);
             this.fileSequencer = 0;
+
         }
 
 

@@ -15,14 +15,20 @@ namespace audioCracker
 
         private OpenFileDialog openFileDialog;
         private Wavplayer soundPlayer;
+        private PlotManager plotManager;
+        private TimeManager timeManager;
 
         private void setupUIComponents()
         {
             this.openFileDialog = new OpenFileDialog();
             this.openFileDialog.Filter = "wav files (*.wav)|*.wav|All files (*.*)|*.*;";
-            this.soundPlayer = new Wavplayer(this.playButton, this.stopButton, this.durationLabel, this.currentLabel, this.playPanel);
-        
-            
+
+            this.timeManager = new TimeManager();
+            this.soundPlayer = new Wavplayer(this.playButton, this.stopButton, 
+                this.durationLabel, this.currentLabel, this.playPanel, this.timeManager);
+
+            this.plotManager = new PlotManager(this.dataPlot, this.timeManager);
+            this.plotManager.ShowPlot();
         }
 
         private void fileButton_Click(object sender, EventArgs e)

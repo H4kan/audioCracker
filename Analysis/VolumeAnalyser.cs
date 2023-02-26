@@ -12,9 +12,8 @@ namespace audioCracker.Analysis
         {
             var fList = new List<double>();
             var rnd = new Random();
-            for (int i = 0; i < 1000; i++)
-            {
-                fList.Add(100 * rnd.NextDouble());
+            foreach(var item in data) {
+                fList.Add(Math.Sqrt(item));
             }
             return fList;
         }
