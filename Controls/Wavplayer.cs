@@ -55,6 +55,11 @@ namespace audioCracker.Controls
             this.durationChanger.ChangeDuration(length);
         }
 
+        public int GetDurationInMs()
+        {
+            return this.durationChanger.GetDurationInMs();
+        }
+
         public void Play()
         {
             if (!this.isAudioPlaying)

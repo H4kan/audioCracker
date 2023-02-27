@@ -1,4 +1,5 @@
 ﻿using audioCracker.Analysis;
+using audioCracker.Decoder;
 using ScottPlot;
 using ScottPlot.Plottable;
 using System;
@@ -23,17 +24,24 @@ namespace audioCracker.Controls
 
         private SignalPlot signalPlot;
 
+        private FrameMerger frameMerger;
+
         public PlotManager(FormsPlot dataPlot, TimeManager timeManager) {
             this.dataPlot = dataPlot;
             this.analyser = new VolumeAnalyser();
             this.timeManager = timeManager;
-
+            this.frameMerger = new FrameMerger();
 
             this.timeManager.perSecondTimer.Tick += new EventHandler(this.RefreshPlotEvent);
 
 
             this.dataPlot.Plot.XLabel("Time");
             this.dataPlot.Plot.YLabel("Volume");
+        }
+
+        public void LoadFile(string path, int durationInMs) {
+            
+            this.frameMerger.GetFrameDividedAmplitudes(path, durationInMs);
         }
 
         public void ShowPlot()
@@ -47,6 +55,7 @@ namespace audioCracker.Controls
                 );
             this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX, this.displayedX.Select(d => d.ToString("N1")).ToArray());
             this.dataPlot.Refresh();
+
         }
 
         private void RefreshPlotEvent(object sender, EventArgs e)

@@ -41,6 +41,11 @@ namespace audioCracker.Controls
             this.timerManager.perSecondTimer.Tick += new EventHandler(TimerTick);
         }
 
+        public int GetDurationInMs()
+        {
+            return this.durationMs;
+        }
+
         public void ChangeDuration(int durationMs)
         {
             this.durationMs = durationMs;

@@ -39,6 +39,7 @@ namespace audioCracker
                 {
                     this.fileLabel.Text = openFileDialog.SafeFileName;
                     this.soundPlayer.Setup(openFileDialog.FileName);
+                    this.plotManager.LoadFile(openFileDialog.FileName, this.soundPlayer.GetDurationInMs());
 
                 }
                 catch (SecurityException ex)
