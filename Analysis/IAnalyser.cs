@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace audioCracker.Analysis
 {
-    public interface IAnalyser
+    public interface IFrameAnalyser
     {
-        public IEnumerable<double> ConductAnalysis(IEnumerable<double> data);
+        public double ConductAnalysis(IEnumerable<float> data);
     }
 }

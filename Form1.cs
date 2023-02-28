@@ -28,7 +28,7 @@ namespace audioCracker
                 this.durationLabel, this.currentLabel, this.playPanel, this.timeManager);
 
             this.plotManager = new PlotManager(this.dataPlot, this.timeManager);
-            this.plotManager.ShowPlot();
+          
         }
 
         private void fileButton_Click(object sender, EventArgs e)

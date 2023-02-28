@@ -64,7 +64,7 @@ namespace audioCracker.Controls
         {
             if (!this.isAudioPlaying)
             {
-                mciSendString($"play Wfile{fileSequencer}", new StringBuilder(), 0, 0);
+                //mciSendString($"play Wfile{fileSequencer}", new StringBuilder(), 0, 0);
                 this.playButton.Text = "Pause";
                 this.durationChanger.UnpauseCurrentTicker();
             }

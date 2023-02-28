@@ -10,7 +10,7 @@ namespace audioCracker.Decoder
     public class FrameMerger
     {
 
-        private const int frameLenInMs = 1;
+        private const int frameLenInMs = 40;
         private const float frameOverLapPercentage = 0.1F;
 
         private WavDecoder decoder;

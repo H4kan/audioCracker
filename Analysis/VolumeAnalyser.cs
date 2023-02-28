@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace audioCracker.Analysis
 {
-    public class VolumeAnalyser : IAnalyser
+    public class VolumeAnalyser : IFrameAnalyser
     {
-        public IEnumerable<double> ConductAnalysis(IEnumerable<double> data)
+        public double ConductAnalysis(IEnumerable<float> data)
         {
-            var fList = new List<double>();
-            var rnd = new Random();
-            foreach(var item in data) {
-                fList.Add(Math.Sqrt(item));
-            }
-            return fList;
+            return 10.0;
         }
     }
 }
