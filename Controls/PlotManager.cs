@@ -21,8 +21,6 @@ namespace audioCracker.Controls
         private double[] actualX;
         private double[] displayedY;
 
-        private SignalPlot signalPlot;
-
         private FrameProcessor frameProcessor;
 
         private int framesPerSecond;
@@ -31,10 +29,10 @@ namespace audioCracker.Controls
 
         private int yTicks = 10;
 
-        public PlotManager(FormsPlot dataPlot, TimeManager timeManager) {
+        public PlotManager(FormsPlot dataPlot, TimeManager timeManager, ControlManager controlManager) {
             this.dataPlot = dataPlot;
             this.timeManager = timeManager;
-            this.frameProcessor = new FrameProcessor();
+            this.frameProcessor = new FrameProcessor(this, controlManager);
 
             this.timeManager.perSecondTimer.Tick += new EventHandler(this.RefreshPlotEvent);
 
@@ -71,7 +69,7 @@ namespace audioCracker.Controls
 
             var yTickPlot = Enumerable.Range(0, yTicks).Select(i => range.Item1 + i * tickLength);
 
-            this.signalPlot = this.dataPlot.Plot.AddSignal(
+            this.dataPlot.Plot.AddSignal(
                 displayedY,
                 1
                 );

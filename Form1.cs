@@ -1,4 +1,5 @@
 using audioCracker.Controls;
+using audioCracker.Loading;
 using System.Media;
 using System.Security;
 using System.Windows.Forms;
@@ -17,17 +18,23 @@ namespace audioCracker
         private Wavplayer soundPlayer;
         private PlotManager plotManager;
         private TimeManager timeManager;
+        private ControlManager controlManager;
 
         private void setupUIComponents()
         {
             this.openFileDialog = new OpenFileDialog();
             this.openFileDialog.Filter = "wav files (*.wav)|*.wav|All files (*.*)|*.*;";
 
+            this.controlManager = new ControlManager(this.playButton, 
+                this.stopButton, this.fileButton, 
+                this.plotComboBox, this.loadingPanel,
+                this.estimatedTimeLabel);
+
             this.timeManager = new TimeManager();
             this.soundPlayer = new Wavplayer(this.playButton, this.stopButton, 
                 this.durationLabel, this.currentLabel, this.playPanel, this.timeManager);
 
-            this.plotManager = new PlotManager(this.dataPlot, this.timeManager);
+            this.plotManager = new PlotManager(this.dataPlot, this.timeManager, this.controlManager);
           
         }
 

@@ -23,7 +23,6 @@ namespace audioCracker.Controls
         private Panel playPanel;
         private DurationChanger durationChanger;
         private int fileSequencer;
-        private TimeManager timeManager;
 
         public Wavplayer(Button playButton, Button stopButton, Label durationLabel, Label currentLabel, Panel playPanel, TimeManager timeManager)
         {

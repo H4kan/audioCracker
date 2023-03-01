@@ -1,14 +1,19 @@
 ﻿using audioCracker.Analysis;
+using audioCracker.Controls;
+using audioCracker.Loading;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace audioCracker.Decoder
 {
     public class FrameProcessor
     {
+
+        private LoaderManager loaderManager;
 
         private IFrameAnalyser currentAnalyser;
 
@@ -18,8 +23,11 @@ namespace audioCracker.Decoder
 
         private IEnumerable<double> processedFrames;
 
-        public FrameProcessor() { 
+        private int estimatedTimeInSeconds;
+
+        public FrameProcessor(PlotManager plotManager, ControlManager controlManager) { 
             this.frameMerger = new FrameMerger();
+            this.loaderManager = new LoaderManager(this, plotManager, controlManager);
         }
 
         public void LoadFramesFromFile(string filename, int durationInMs)
@@ -32,10 +40,14 @@ namespace audioCracker.Decoder
         {
             this.currentAnalyser = analyser;
 
+
+            this.ConductEstimation();
+
             var childThRef = new ThreadStart(this.ConductAnalysis);
 
             var childThread = new Thread(childThRef);
             childThread.Start();
+            this.loaderManager.StartLoading();
         }
 
         public IEnumerable<double> GetProcessedFrames(int startFrame, int endFrame)
@@ -48,9 +60,20 @@ namespace audioCracker.Decoder
             return (this.processedFrames.Min(), this.processedFrames.Max());
         }
 
+        public int GetEstimatedTime()
+        {
+            return estimatedTimeInSeconds;
+        }
+
+        private void ConductEstimation()
+        {
+            this.estimatedTimeInSeconds = 100;
+        }
+
         private void ConductAnalysis()
         {
             this.processedFrames = this.frames.Select(f => this.currentAnalyser.ConductAnalysis(f)).ToList();
+            this.loaderManager.StopLoading();
         }
     }
 }
