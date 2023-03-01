@@ -10,7 +10,7 @@ namespace audioCracker.Analysis
     {
         public double ConductAnalysis(IEnumerable<float> data)
         {
-            return 10.0;
+            return Math.Sqrt(data.Average(d => d * d));
         }
     }
 }

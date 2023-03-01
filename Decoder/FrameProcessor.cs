@@ -16,6 +16,8 @@ namespace audioCracker.Decoder
 
         private IEnumerable<IEnumerable<float>> frames;
 
+        private IEnumerable<double> processedFrames;
+
         public FrameProcessor() { 
             this.frameMerger = new FrameMerger();
         }
@@ -29,12 +31,26 @@ namespace audioCracker.Decoder
         public void SetAnalyser(IFrameAnalyser analyser)
         {
             this.currentAnalyser = analyser;
+
+            var childThRef = new ThreadStart(this.ConductAnalysis);
+
+            var childThread = new Thread(childThRef);
+            childThread.Start();
         }
 
         public IEnumerable<double> GetProcessedFrames(int startFrame, int endFrame)
         {
-            return this.frames.Select(f => this.currentAnalyser.ConductAnalysis(f)).Skip(startFrame).Take(endFrame - startFrame);
+            return this.processedFrames.Skip(startFrame).Take(endFrame - startFrame);
         }
 
+        public (double, double) GetRange()
+        {
+            return (this.processedFrames.Min(), this.processedFrames.Max());
+        }
+
+        private void ConductAnalysis()
+        {
+            this.processedFrames = this.frames.Select(f => this.currentAnalyser.ConductAnalysis(f)).ToList();
+        }
     }
 }

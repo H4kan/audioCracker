@@ -29,6 +29,8 @@ namespace audioCracker.Controls
 
         private int framesPerPlot;
 
+        private int yTicks = 10;
+
         public PlotManager(FormsPlot dataPlot, TimeManager timeManager) {
             this.dataPlot = dataPlot;
             this.timeManager = timeManager;
@@ -49,7 +51,7 @@ namespace audioCracker.Controls
             this.frameProcessor.LoadFramesFromFile(path, durationInMs);
             this.frameProcessor.SetAnalyser(new VolumeAnalyser());
 
-            this.ShowPlot();
+            //this.ShowPlot();
         }
 
         public void ShowPlot()
@@ -64,11 +66,21 @@ namespace audioCracker.Controls
 
             this.displayedY = this.frameProcessor.GetProcessedFrames(startIdx, endIdx).ToArray();
 
+            var range = this.frameProcessor.GetRange();
+            var tickLength = (range.Item2 - range.Item1) / (yTicks - 1);
+
+            var yTickPlot = Enumerable.Range(0, yTicks).Select(i => range.Item1 + i * tickLength);
+
             this.signalPlot = this.dataPlot.Plot.AddSignal(
                 displayedY,
                 1
                 );
-            this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX., this.actualX.Select(d => d.ToString("N1")).ToArray());
+            this.dataPlot.Plot.YAxis.ManualTickPositions(yTickPlot.ToArray(), yTickPlot.Select(d => d.ToString("F2")).ToArray());
+            //this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX, this.actualX.Select(d => d.ToString("N1")).ToArray());
+            for (int i = 0; i < this.displayedX.Length; i++)
+            {
+                this.actualX[i] = this.actualX[i] + this.framesPerSecond;
+            }
             this.dataPlot.Refresh();
 
         }
@@ -83,14 +95,24 @@ namespace audioCracker.Controls
             var startIdx = (int)Math.Floor(this.actualX[0]);
             var endIdx = (int)Math.Floor(this.actualX[this.actualX.Length - 1]);
 
-            this.displayedY = this.frameProcessor.GetProcessedFrames(startIdx, endIdx).ToArray();
+            var newDisplayedY =  this.frameProcessor.GetProcessedFrames(startIdx, endIdx).ToArray();
 
-            this.dataPlot.Plot.Remove(this.signalPlot);
-            this.signalPlot = this.dataPlot.Plot.AddSignal(
-                displayedY,
-                1
-                );
-            this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX, this.displayedX.Select(d => d.ToString("N1")).ToArray());
+
+            for (int i = 0; i < newDisplayedY.Length; i++)
+            {
+                this.displayedY[i] = newDisplayedY[i];
+            }
+            for (int j = newDisplayedY.Length; j < this.displayedY.Length; j++)
+            {
+                this.displayedY[j] = 0;
+            }
+
+            //this.dataPlot.Plot.Remove(this.signalPlot);
+            //this.signalPlot = this.dataPlot.Plot.AddSignal(
+            //    displayedY,
+            //    1
+            //    );
+            //this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX, this.displayedX.Select(d => d.ToString("N1")).ToArray());
             this.dataPlot.Render();
         }
 
