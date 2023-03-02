@@ -20,6 +20,8 @@ namespace audioCracker.Controls
         private double[] displayedX;
         private double[] actualX;
         private double[] displayedY;
+        private List<int> displayedXSeconds;
+        private double[] actualXSeconds;
 
         private FrameProcessor frameProcessor;
 
@@ -28,6 +30,8 @@ namespace audioCracker.Controls
         private int framesPerPlot;
 
         private int yTicks = 10;
+
+        private int secondsOnFrame = 5;
 
         public PlotManager(FormsPlot dataPlot, TimeManager timeManager, ControlManager controlManager) {
             this.dataPlot = dataPlot;
@@ -41,7 +45,12 @@ namespace audioCracker.Controls
             this.dataPlot.Plot.YLabel("Volume");
 
             this.framesPerSecond = 25;
-            this.framesPerPlot = this.framesPerSecond * 10;
+            this.framesPerPlot = this.framesPerSecond * secondsOnFrame;
+        }
+
+        public void ChangeSecondsOnPlot(int seconds)
+        {
+            this.framesPerSecond = seconds + 1;
         }
 
         public void LoadFile(string path, int durationInMs) {
@@ -49,7 +58,6 @@ namespace audioCracker.Controls
             this.frameProcessor.LoadFramesFromFile(path, durationInMs);
             this.frameProcessor.SetAnalyser(new VolumeAnalyser());
 
-            //this.ShowPlot();
         }
 
         public void ShowPlot()
@@ -58,22 +66,20 @@ namespace audioCracker.Controls
             this.displayedX = Enumerable.Range(0, framesPerPlot).Select(n => (double)n).ToArray();
 
 
-
             var startIdx = (int)Math.Floor(this.actualX[0]);
             var endIdx = (int)Math.Floor(this.actualX[this.actualX.Length - 1]);
 
             this.displayedY = this.frameProcessor.GetProcessedFrames(startIdx, endIdx).ToArray();
 
-            var range = this.frameProcessor.GetRange();
-            var tickLength = (range.Item2 - range.Item1) / (yTicks - 1);
-
-            var yTickPlot = Enumerable.Range(0, yTicks).Select(i => range.Item1 + i * tickLength);
+           
 
             this.dataPlot.Plot.AddSignal(
                 displayedY,
                 1
                 );
-            this.dataPlot.Plot.YAxis.ManualTickPositions(yTickPlot.ToArray(), yTickPlot.Select(d => d.ToString("F2")).ToArray());
+            
+            this.SetupXTick();
+            this.SetupYTick();
             //this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX, this.actualX.Select(d => d.ToString("N1")).ToArray());
             for (int i = 0; i < this.displayedX.Length; i++)
             {
@@ -83,11 +89,39 @@ namespace audioCracker.Controls
 
         }
 
+        private void SetupYTick()
+        {
+            var yRange = this.frameProcessor.GetRange();
+            var tickLength = (yRange.Item2 - yRange.Item1) / (yTicks - 1);
+
+            var yTickPlot = Enumerable.Range(0, yTicks).Select(i => yRange.Item1 + i * tickLength);
+            
+            this.dataPlot.Plot.YAxis.ManualTickPositions(yTickPlot.ToArray(), yTickPlot.Select(d => d.ToString("F2")).ToArray());
+        }
+        private void SetupXTick()
+        {
+            var xRangeSeconds = (0, secondsOnFrame);
+            var tickLengthSeconds = (xRangeSeconds.Item2 - xRangeSeconds.Item1) / (secondsOnFrame - 1);
+
+            var xRange = (0, framesPerPlot);
+            var tickLength = (xRange.Item2 - xRange.Item1) / (secondsOnFrame - 1);
+
+            this.displayedXSeconds = Enumerable.Range(0, secondsOnFrame).Select(i => xRangeSeconds.Item1 + i * tickLengthSeconds).ToList();
+            this.actualXSeconds = Enumerable.Range(0, secondsOnFrame).Select(i => (double)(xRange.Item1 + i * tickLength)).ToArray();
+
+            this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualXSeconds, this.displayedXSeconds.Select(d => d.ToString()).ToArray());
+        }
+
         private void RefreshPlotEvent(object sender, EventArgs e)
         {
             for (int i = 0; i < this.displayedX.Length; i++)
             {
                 this.actualX[i] = this.actualX[i] + this.framesPerSecond;
+                
+            }
+            for (int i = 0; i < this.displayedXSeconds.Count; i++)
+            {
+                this.displayedXSeconds[i] = this.displayedXSeconds[i] + 1;
             }
 
             var startIdx = (int)Math.Floor(this.actualX[0]);
@@ -105,12 +139,7 @@ namespace audioCracker.Controls
                 this.displayedY[j] = 0;
             }
 
-            //this.dataPlot.Plot.Remove(this.signalPlot);
-            //this.signalPlot = this.dataPlot.Plot.AddSignal(
-            //    displayedY,
-            //    1
-            //    );
-            //this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX, this.displayedX.Select(d => d.ToString("N1")).ToArray());
+            this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualXSeconds, this.displayedXSeconds.Select(d => d.ToString()).ToArray());
             this.dataPlot.Render();
         }
 

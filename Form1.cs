@@ -25,7 +25,9 @@ namespace audioCracker
             this.openFileDialog = new OpenFileDialog();
             this.openFileDialog.Filter = "wav files (*.wav)|*.wav|All files (*.*)|*.*;";
 
-            this.controlManager = new ControlManager(this.playButton, 
+            this.controlManager = new ControlManager(
+                this,
+                this.playButton, 
                 this.stopButton, this.fileButton, 
                 this.plotComboBox, this.loadingPanel,
                 this.estimatedTimeLabel);

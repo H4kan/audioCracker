@@ -21,16 +21,32 @@ namespace audioCracker.Loading
             this.frameProcessor = frameProcessor;
         }
 
+        public void InitLoading()
+        {
+            this.controlManager.form.Invoke(new Action(() =>
+            {
+                this.controlManager.EnableControls(false);
+                this.controlManager.ShowInitialLoadingPanel(true);
+            }));
+        }
+
         public void StartLoading()
         {
-            this.controlManager.EnableControls(false);
-            this.controlManager.ShowLoadingPanel(true, this.frameProcessor.GetEstimatedTime());
+            this.controlManager.form.Invoke(new Action(() =>
+            {
+                this.controlManager.ShowLoadingPanel(true, this.frameProcessor.GetEstimatedTime());
+            }));
         }
 
         public void StopLoading()
         {
-            this.controlManager.EnableControls(true);
-            this.controlManager.ShowLoadingPanel(false);
+            this.controlManager.form.Invoke(new Action(() =>
+            {
+                this.controlManager.EnableControls(true);
+                this.controlManager.ShowLoadingPanel(false);
+                this.plotManager.ShowPlot();
+            }));
+            
         }
     }
 }
