@@ -24,6 +24,7 @@ namespace audioCracker.Controls
         private double[] actualXSeconds;
 
         private FrameProcessor frameProcessor;
+        private AnalysisManager analysisManager;
 
         private int framesPerSecond;
 
@@ -33,12 +34,17 @@ namespace audioCracker.Controls
 
         private int secondsOnFrame = 5;
 
-        public PlotManager(FormsPlot dataPlot, TimeManager timeManager, ControlManager controlManager) {
+        private IPlottable? currentPlot;
+
+        public bool IsLoaded { get; private set; }
+
+        private EventHandler? currentHandler;
+
+        public PlotManager(FormsPlot dataPlot, TimeManager timeManager, ControlManager controlManager, AnalysisManager analysisManager) {
             this.dataPlot = dataPlot;
             this.timeManager = timeManager;
             this.frameProcessor = new FrameProcessor(this, controlManager);
-
-            this.timeManager.perSecondTimer.Tick += new EventHandler(this.RefreshPlotEvent);
+            this.analysisManager = analysisManager;
 
 
             this.dataPlot.Plot.XLabel("Time");
@@ -46,6 +52,8 @@ namespace audioCracker.Controls
 
             this.framesPerSecond = 25;
             this.framesPerPlot = this.framesPerSecond * secondsOnFrame;
+            this.currentPlot = null;
+            this.IsLoaded = false;
         }
 
         public void ChangeSecondsOnPlot(int seconds)
@@ -56,8 +64,14 @@ namespace audioCracker.Controls
         public void LoadFile(string path, int durationInMs) {
             
             this.frameProcessor.LoadFramesFromFile(path, durationInMs);
-            this.frameProcessor.SetAnalyser(new VolumeAnalyser());
+            this.IsLoaded = false;
+        }
 
+        public void StartAnalysis()
+        {
+            this.frameProcessor.SetAnalyser(this.analysisManager.GetAnalyser());
+            this.frameProcessor.StartAnalysis();
+            this.IsLoaded = true;
         }
 
         public void ShowPlot()
@@ -71,22 +85,29 @@ namespace audioCracker.Controls
 
             this.displayedY = this.frameProcessor.GetProcessedFrames(startIdx, endIdx).ToArray();
 
-           
+            if (this.currentPlot!= null)
+            {
+                this.dataPlot.Plot.Remove(this.currentPlot);
+            }
 
-            this.dataPlot.Plot.AddSignal(
+            this.currentPlot = this.dataPlot.Plot.AddSignal(
                 displayedY,
                 1
                 );
             
             this.SetupXTick();
             this.SetupYTick();
-            //this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualX, this.actualX.Select(d => d.ToString("N1")).ToArray());
-            for (int i = 0; i < this.displayedX.Length; i++)
-            {
-                this.actualX[i] = this.actualX[i] + this.framesPerSecond;
-            }
-            this.dataPlot.Refresh();
 
+            this.ResetPostion();
+            this.dataPlot.Refresh();
+            if (this.currentHandler != null)
+            {
+                this.currentHandler = new EventHandler(this.RefreshPlotEvent);
+                this.timeManager.perSecondTimer.Tick += this.currentHandler;
+            }
+
+   
+            this.dataPlot.Visible = true;
         }
 
         private void SetupYTick()
@@ -110,6 +131,19 @@ namespace audioCracker.Controls
             this.actualXSeconds = Enumerable.Range(0, secondsOnFrame).Select(i => (double)(xRange.Item1 + i * tickLength)).ToArray();
 
             this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualXSeconds, this.displayedXSeconds.Select(d => d.ToString()).ToArray());
+        }
+
+        private void ResetPostion()
+        {
+            for (int i = 0; i < this.displayedX.Length; i++)
+            {
+                this.actualX[i] = this.actualX[i] + this.framesPerSecond;
+
+            }
+            for (int i = 0; i < this.displayedXSeconds.Count; i++)
+            {
+                this.displayedXSeconds[i] = 0;
+            }
         }
 
         private void RefreshPlotEvent(object sender, EventArgs e)

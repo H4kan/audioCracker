@@ -20,19 +20,26 @@ namespace audioCracker.Controls
         private bool isAudioPlaying;
         private Button playButton;
         private Button stopButton;
-        private Panel playPanel;
         private DurationChanger durationChanger;
         private int fileSequencer;
+        private ControlManager controlManager;
+        private PlotManager plotManager;
 
-        public Wavplayer(Button playButton, Button stopButton, Label durationLabel, Label currentLabel, Panel playPanel, TimeManager timeManager)
+        public Wavplayer(Button playButton, 
+            Button stopButton,
+            Label durationLabel,
+            Label currentLabel,
+            TimeManager timeManager,
+            ControlManager controlManager,
+            PlotManager plotManager)
         {
             this.playButton = playButton;
             this.stopButton = stopButton;
-            this.playPanel = playPanel;
             this.isAudioPlaying = false;
             this.durationChanger = new DurationChanger(this, durationLabel, currentLabel, timeManager);
             this.fileSequencer = 0;
-
+            this.controlManager = controlManager;
+            this.plotManager = plotManager;
         }
 
 
@@ -47,11 +54,12 @@ namespace audioCracker.Controls
             mciSendString($"open \"{path}\" alias Wfile{fileSequencer}", new StringBuilder(), 0, 0);
             mciSendString($"status Wfile{fileSequencer} length", durationBuilder, durationBuilder.Capacity, 0);
             this.isAudioPlaying= false;
-            this.playPanel.Visible = true;
-
+            this.controlManager.EnableNonPlayControls(!this.isAudioPlaying);
             int length = 0;
             int.TryParse(durationBuilder.ToString(), out length);
             this.durationChanger.ChangeDuration(length);
+
+            this.controlManager.EnableControls(true);
         }
 
         public int GetDurationInMs()
@@ -74,7 +82,7 @@ namespace audioCracker.Controls
                 this.durationChanger.PauseCurrentTicker();
             }
             this.isAudioPlaying = !this.isAudioPlaying;
-            
+            this.controlManager.EnableNonPlayControls(!this.isAudioPlaying);
         }
 
         public void Stop()
@@ -82,7 +90,13 @@ namespace audioCracker.Controls
             mciSendString($"stop Wfile{fileSequencer}", new StringBuilder(), 0, 0);
             mciSendString($"seek Wfile{fileSequencer} to start", new StringBuilder(), 0, 0);
             this.isAudioPlaying = false;
+            this.controlManager.EnableNonPlayControls(!this.isAudioPlaying);
             this.durationChanger.ResetCurrentTicker();
+            if (this.plotManager.IsLoaded)
+            {
+                this.plotManager.ShowPlot();
+            }
+
             this.playButton.Text = "Play";
         }
     }

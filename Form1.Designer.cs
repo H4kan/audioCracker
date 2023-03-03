@@ -37,6 +37,7 @@
             this.durationLabel = new System.Windows.Forms.Label();
             this.stopButton = new System.Windows.Forms.Button();
             this.playButton = new System.Windows.Forms.Button();
+            this.analysisButton = new System.Windows.Forms.Button();
             this.loadingPanel = new System.Windows.Forms.Panel();
             this.estimatedTimeLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,7 +72,7 @@
             this.fileLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fileLabel.Location = new System.Drawing.Point(99, 29);
             this.fileLabel.Name = "fileLabel";
-            this.fileLabel.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.fileLabel.Padding = new System.Windows.Forms.Padding(5);
             this.fileLabel.Size = new System.Drawing.Size(207, 37);
             this.fileLabel.TabIndex = 1;
             this.fileLabel.Text = "File name";
@@ -88,6 +89,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.analysisButton);
             this.splitContainer1.Panel2.Controls.Add(this.loadingPanel);
             this.splitContainer1.Panel2.Controls.Add(this.dataPlot);
             this.splitContainer1.Panel2.Controls.Add(this.plotComboBox);
@@ -108,7 +110,6 @@
             this.playPanel.Name = "playPanel";
             this.playPanel.Size = new System.Drawing.Size(442, 333);
             this.playPanel.TabIndex = 0;
-            this.playPanel.Visible = false;
             // 
             // label1
             // 
@@ -169,6 +170,20 @@
             this.playButton.UseVisualStyleBackColor = false;
             this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
+            // analysisButton
+            // 
+            this.analysisButton.BackColor = System.Drawing.Color.Goldenrod;
+            this.analysisButton.Enabled = false;
+            this.analysisButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.analysisButton.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.analysisButton.Location = new System.Drawing.Point(719, 22);
+            this.analysisButton.Name = "analysisButton";
+            this.analysisButton.Size = new System.Drawing.Size(106, 41);
+            this.analysisButton.TabIndex = 7;
+            this.analysisButton.Text = "Analyze";
+            this.analysisButton.UseVisualStyleBackColor = false;
+            this.analysisButton.Click += new System.EventHandler(this.analysisButton_Click);
+            // 
             // loadingPanel
             // 
             this.loadingPanel.Controls.Add(this.estimatedTimeLabel);
@@ -212,18 +227,19 @@
             this.dataPlot.Name = "dataPlot";
             this.dataPlot.Size = new System.Drawing.Size(825, 576);
             this.dataPlot.TabIndex = 2;
+            this.dataPlot.Visible = false;
             // 
             // plotComboBox
             // 
             this.plotComboBox.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.plotComboBox.Enabled = false;
             this.plotComboBox.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.plotComboBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.plotComboBox.FormattingEnabled = true;
-            this.plotComboBox.Location = new System.Drawing.Point(138, 37);
+            this.plotComboBox.Location = new System.Drawing.Point(31, 25);
             this.plotComboBox.Name = "plotComboBox";
             this.plotComboBox.Size = new System.Drawing.Size(653, 33);
             this.plotComboBox.TabIndex = 1;
+            this.plotComboBox.SelectedIndexChanged += new System.EventHandler(this.plotComboBox_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -262,5 +278,6 @@
         private Panel loadingPanel;
         private Label estimatedTimeLabel;
         private Label label2;
+        private Button analysisButton;
     }
 }

@@ -84,7 +84,7 @@ namespace audioCracker.Controls
             var nextCurrent = this.currentMs + 1000;
             if (nextCurrent < durationMs)
             {
-                this.ChangeCurrent(this.currentMs + 1000);
+                this.ChangeCurrent(nextCurrent);
             }
             else
             {

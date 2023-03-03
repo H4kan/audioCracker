@@ -45,7 +45,10 @@ namespace audioCracker.Decoder
         public void SetAnalyser(IFrameAnalyser analyser)
         {
             this.currentAnalyser = analyser;
+        }
 
+        public void StartAnalysis()
+        {
             this.loaderManager.InitLoading();
             this.ConductEstimation();
 
@@ -56,8 +59,7 @@ namespace audioCracker.Decoder
             }
 
             this.processedFrames = new double[this.frames.Count()];
-            
-            
+
             this.loaderManager.StartLoading();
             this.FreeLoading();
         }
@@ -84,13 +86,20 @@ namespace audioCracker.Decoder
             var frameEst = 500;
             var factor = 18;
 
-            stopwatch.Start();
-            this.frames.Take(frameEst).Select(f => this.currentAnalyser.ConductAnalysis(f)).ToList();
-            stopwatch.Stop();
+            if (this.frames.Count() > 4 * frameEst)
+            {
+                stopwatch.Start();
+                this.frames.Take(frameEst).Select(f => this.currentAnalyser.ConductAnalysis(f)).ToList();
+                stopwatch.Stop();
 
-            var estimatedTime = stopwatch.ElapsedMilliseconds * this.frames.Count() * factor / (frameEst * numOfThreads);
+                var estimatedTime = stopwatch.ElapsedMilliseconds * this.frames.Count() * factor / (frameEst * numOfThreads);
 
-            this.estimatedTimeInSeconds = (int)(estimatedTime / 1000);
+                this.estimatedTimeInSeconds = (int)(estimatedTime / 1000);
+            }
+            else
+            {
+                this.estimatedTimeInSeconds = 0;
+            }
         }
 
         private bool ConductPartialAnalysis(int index)
