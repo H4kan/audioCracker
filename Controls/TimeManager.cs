@@ -10,6 +10,8 @@ namespace audioCracker.Controls
     {
         public Timer perSecondTimer;
 
+        public bool IsPaused { get; set; }
+
         public TimeManager() {
             this.perSecondTimer = new Timer();
 

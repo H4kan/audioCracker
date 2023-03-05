@@ -1,4 +1,5 @@
-﻿using System;
+﻿using audioCracker.Analysis.Clip;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,32 +9,45 @@ namespace audioCracker.Analysis
 {
     public class AnalysisManager
     {
-        private List<(string, IFrameAnalyser)> frameAnalysers;
+        private List<(string, IFrameAnalyser, IClipAnalyser?, string)> clipFrameAnalysers;
 
-        private (string, IFrameAnalyser) currentAnalyser;
+        private (string, IFrameAnalyser, IClipAnalyser?, string) currentAnalyser;
 
         public AnalysisManager()
         {
-            this.frameAnalysers = new List<(string, IFrameAnalyser)>()
+            this.clipFrameAnalysers = new List<(string, IFrameAnalyser, IClipAnalyser?, string)>()
             {
-                new ("Volume", new VolumeAnalyser()),
-                new ("some", new VolumeAnalyser())
+                new ("Volume", new VolumeAnalyser(), null, "Volume"),
+                new ("STE", new STEAnalyser(), null, "Energy"),
+                new ("ZCR", new ZCRAnalyser(), null, "Crossing zero count"),
+                new ("autoCorr Frequency Detection", new CorFreqAnalyser(), null, "Base tone frequency"),
+                new ("AMDF Frequency Detection", new AmdfFreqAnalyser(), null, "Base tone frequency"),
+                new ("VSTD clip volume", new VolumeAnalyser(), new StdNormalizedAnalyser(), "VSTD"),
+                new ("Average clip volume", new VolumeAnalyser(), new AverageAnalyser(), "Volume"),
+                new ("LSTER", new STEAnalyser(), new CutDownAnalyser(50.0), "fraction of frames"),
+                new ("ZSTD", new ZCRAnalyser(), new StdAnalyser(), "ZSTD"),
+                new ("HZCRR",  new ZCRAnalyser(), new CutUpAnalyser(150.0), "HZCRR")
             };
         }
 
         public IEnumerable<string> GetAnalysersNames()
         {
-            return this.frameAnalysers.Select(i => i.Item1);
+            return this.clipFrameAnalysers.Select(i => i.Item1);
         }
 
         public void ChangeAnalyser(string analyserName)
         {
-            this.currentAnalyser = this.frameAnalysers.First(a => a.Item1== analyserName);
+            this.currentAnalyser = this.clipFrameAnalysers.First(a => a.Item1== analyserName);
         }
 
-        public IFrameAnalyser GetAnalyser()
+        public (IFrameAnalyser, IClipAnalyser?) GetAnalyser()
         {
-            return this.currentAnalyser.Item2;
+            return (this.currentAnalyser.Item2, this.currentAnalyser.Item3);
+        }
+
+        public string GetYLabel()
+        {
+            return this.currentAnalyser.Item4;
         }
 
 }

@@ -27,7 +27,6 @@ namespace audioCracker
             this.openFileDialog = new OpenFileDialog();
             this.openFileDialog.Filter = "wav files (*.wav)|*.wav|All files (*.*)|*.*;";
 
-
             this.analysisManager = new AnalysisManager();
             this.controlManager = new ControlManager(
                 this.analysisManager,
@@ -37,7 +36,8 @@ namespace audioCracker
                 this.plotComboBox, this.loadingPanel,
                 this.estimatedTimeLabel,
                 this.analysisButton,
-                this.dataPlot);
+                this.dataPlot,
+                this.plotSecondsBox);
 
             this.timeManager = new TimeManager();
 
@@ -46,7 +46,7 @@ namespace audioCracker
             this.soundPlayer = new Wavplayer(this.playButton, this.stopButton, 
                 this.durationLabel, this.currentLabel, this.timeManager, this.controlManager, this.plotManager);
 
-            
+            this.plotManager.ChangeSecondsOnPlot((int)this.plotSecondsBox.Value + 1);
             
             this.controlManager.InitializeControls();
         }
@@ -57,9 +57,9 @@ namespace audioCracker
             {
                 try
                 {
-                    this.controlManager.ResetPlot();
                     this.fileLabel.Text = openFileDialog.SafeFileName;
                     this.soundPlayer.Setup(openFileDialog.FileName);
+                    this.controlManager.ResetPlot();
                     this.plotManager.LoadFile(openFileDialog.FileName, this.soundPlayer.GetDurationInMs());
 
                 }
@@ -84,9 +84,8 @@ namespace audioCracker
 
         private void analysisButton_Click(object sender, EventArgs e)
         {
-#pragma warning disable CS8604 // Possible null reference argument.
-            this.analysisManager.ChangeAnalyser(this.plotComboBox.SelectedItem.ToString());
-#pragma warning restore CS8604 // Possible null reference argument.
+            this.soundPlayer.Stop();
+
             this.plotManager.StartAnalysis();
         }
 
@@ -95,7 +94,30 @@ namespace audioCracker
             if (this.plotComboBox.SelectedIndex >= 0)
             {
                 this.analysisButton.Enabled = true;
+#pragma warning disable CS8604 // Possible null reference argument.
+                this.analysisManager.ChangeAnalyser(this.plotComboBox.SelectedItem.ToString());
+#pragma warning restore CS8604 // Possible null reference argument.
+                if (this.analysisManager.GetAnalyser().Item2 != null)
+                {
+                    this.silenceCheckBox.Checked = false;
+                    this.silenceCheckBox.Enabled = false;
+                    this.plotManager.EnableSilence(false);
+                }
+                else
+                {
+                    this.silenceCheckBox.Enabled = true;
+                }
             }
+        }
+
+        private void plotSecondsBox_ValueChanged(object sender, EventArgs e)
+        {
+            this.plotManager.ChangeSecondsOnPlot((int)this.plotSecondsBox.Value + 1);
+        }
+
+        private void silenceCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.plotManager.EnableSilence(this.silenceCheckBox.Checked);
         }
     }
 }

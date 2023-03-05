@@ -55,6 +55,7 @@ namespace audioCracker.Controls
             this.durationString = $"{minutesDuration.ToString("D2")}:{secondsDuration.ToString("D2")}";
 
             this.durationLabel.Text = this.durationString;
+            this.timerManager.IsPaused = true;  
             this.timerManager.perSecondTimer.Stop();
             this.ChangeCurrent(0);
         }
@@ -71,11 +72,13 @@ namespace audioCracker.Controls
 
         public void UnpauseCurrentTicker()
         {
+            this.timerManager.IsPaused = false;
             this.timerManager.perSecondTimer.Start();
         }
 
         public void PauseCurrentTicker()
         {
+            this.timerManager.IsPaused = true;
             this.timerManager.perSecondTimer.Stop();
         }
 
@@ -95,6 +98,7 @@ namespace audioCracker.Controls
 
         public void ResetCurrentTicker()
         {
+            this.timerManager.IsPaused = true;
             this.timerManager.perSecondTimer.Stop();
             this.ChangeCurrent(0);
         }

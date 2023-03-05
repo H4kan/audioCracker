@@ -37,17 +37,22 @@
             this.durationLabel = new System.Windows.Forms.Label();
             this.stopButton = new System.Windows.Forms.Button();
             this.playButton = new System.Windows.Forms.Button();
+            this.plotSecondsBox = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.analysisButton = new System.Windows.Forms.Button();
             this.loadingPanel = new System.Windows.Forms.Panel();
             this.estimatedTimeLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataPlot = new ScottPlot.FormsPlot();
             this.plotComboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.silenceCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.playPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.plotSecondsBox)).BeginInit();
             this.loadingPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +94,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.silenceCheckBox);
+            this.splitContainer1.Panel2.Controls.Add(this.label4);
+            this.splitContainer1.Panel2.Controls.Add(this.plotSecondsBox);
+            this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.analysisButton);
             this.splitContainer1.Panel2.Controls.Add(this.loadingPanel);
             this.splitContainer1.Panel2.Controls.Add(this.dataPlot);
@@ -170,13 +179,47 @@
             this.playButton.UseVisualStyleBackColor = false;
             this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
+            // plotSecondsBox
+            // 
+            this.plotSecondsBox.Location = new System.Drawing.Point(597, 13);
+            this.plotSecondsBox.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.plotSecondsBox.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.plotSecondsBox.Name = "plotSecondsBox";
+            this.plotSecondsBox.Size = new System.Drawing.Size(56, 27);
+            this.plotSecondsBox.TabIndex = 8;
+            this.plotSecondsBox.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.plotSecondsBox.ValueChanged += new System.EventHandler(this.plotSecondsBox_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.label3.Location = new System.Drawing.Point(493, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 25);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Seconds:";
+            // 
             // analysisButton
             // 
             this.analysisButton.BackColor = System.Drawing.Color.Goldenrod;
             this.analysisButton.Enabled = false;
             this.analysisButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.analysisButton.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.analysisButton.Location = new System.Drawing.Point(719, 22);
+            this.analysisButton.Location = new System.Drawing.Point(708, 17);
             this.analysisButton.Name = "analysisButton";
             this.analysisButton.Size = new System.Drawing.Size(106, 41);
             this.analysisButton.TabIndex = 7;
@@ -237,9 +280,31 @@
             this.plotComboBox.FormattingEnabled = true;
             this.plotComboBox.Location = new System.Drawing.Point(31, 25);
             this.plotComboBox.Name = "plotComboBox";
-            this.plotComboBox.Size = new System.Drawing.Size(653, 33);
+            this.plotComboBox.Size = new System.Drawing.Size(418, 33);
             this.plotComboBox.TabIndex = 1;
             this.plotComboBox.SelectedIndexChanged += new System.EventHandler(this.plotComboBox_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.label4.Location = new System.Drawing.Point(506, 48);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 25);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Silence:";
+            // 
+            // silenceCheckBox
+            // 
+            this.silenceCheckBox.AutoSize = true;
+            this.silenceCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.silenceCheckBox.Location = new System.Drawing.Point(597, 51);
+            this.silenceCheckBox.Name = "silenceCheckBox";
+            this.silenceCheckBox.Size = new System.Drawing.Size(18, 17);
+            this.silenceCheckBox.TabIndex = 10;
+            this.silenceCheckBox.UseVisualStyleBackColor = true;
+            this.silenceCheckBox.CheckedChanged += new System.EventHandler(this.silenceCheckBox_CheckedChanged);
             // 
             // Form1
             // 
@@ -252,10 +317,12 @@
             this.Text = "AudioCracker";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.playPanel.ResumeLayout(false);
             this.playPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.plotSecondsBox)).EndInit();
             this.loadingPanel.ResumeLayout(false);
             this.loadingPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -279,5 +346,9 @@
         private Label estimatedTimeLabel;
         private Label label2;
         private Button analysisButton;
+        private NumericUpDown plotSecondsBox;
+        private Label label3;
+        private CheckBox silenceCheckBox;
+        private Label label4;
     }
 }

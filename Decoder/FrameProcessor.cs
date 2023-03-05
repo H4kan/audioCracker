@@ -15,15 +15,15 @@ namespace audioCracker.Decoder
     public class FrameProcessor
     {
 
-        private LoaderManager loaderManager;
+        public LoaderManager loaderManager;
 
-        private IFrameAnalyser currentAnalyser;
+        public IFrameAnalyser currentAnalyser;
 
         private FrameMerger frameMerger;
 
-        private IEnumerable<IEnumerable<float>> frames;
+        public IEnumerable<IEnumerable<float>> frames;
 
-        private double[] processedFrames;
+        public double[] processedFrames;
 
         private int estimatedTimeInSeconds;
 
@@ -47,11 +47,23 @@ namespace audioCracker.Decoder
             this.currentAnalyser = analyser;
         }
 
-        public void StartAnalysis()
+        public async Task StartAnalysis()
         {
+
             this.loaderManager.InitLoading();
             this.ConductEstimation();
 
+
+            this.SetupFrames();
+
+
+            this.loaderManager.StartLoading();
+
+            await this.FreeLoading();
+        }
+
+        public void SetupFrames()
+        {
             this.framesPerThread = this.frames.Count() / numOfThreads;
             if (this.frames.Count() > this.framesPerThread * numOfThreads)
             {
@@ -59,9 +71,6 @@ namespace audioCracker.Decoder
             }
 
             this.processedFrames = new double[this.frames.Count()];
-
-            this.loaderManager.StartLoading();
-            this.FreeLoading();
         }
 
         public IEnumerable<double> GetProcessedFrames(int startFrame, int endFrame)
@@ -102,7 +111,7 @@ namespace audioCracker.Decoder
             }
         }
 
-        private bool ConductPartialAnalysis(int index)
+        public bool ConductPartialAnalysis(int index)
         {
             var offset = index * this.framesPerThread;
             var batchFrames =  this.frames
@@ -114,31 +123,31 @@ namespace audioCracker.Decoder
 
             for (int i = 0; i < endCount; i++)
             {
-                this.processedFrames[offset + i] = Math.Sqrt(batchFrames[i].Average(d => d * d));
+                this.processedFrames[offset + i] = this.currentAnalyser.ConductAnalysis(batchFrames[i]);
             }
             return true;
         }
 
-        private void FreeLoading()
+        private async Task FreeLoading()
         {
-            var childThRef = new ThreadStart(this.ConductAnalysis);
-
-            var childThread = new Thread(childThRef);
-            childThread.Start();
-
-
+            await Task.Run( async () => { await this.ConductAnalysis(); });
         }
 
-        private async void ConductAnalysis()
+        private async Task<bool> ConductAnalysis()
         {
             var tasks = Enumerable.Range(0, numOfThreads).Select(it => Task.Run(() =>
             {
                 this.ConductPartialAnalysis(it);
-            }));
+            })).ToList();
 
             await Task.WhenAll(tasks);
 
+ 
             this.loaderManager.StopLoading();
+
+
+
+            return true;
         }
     }
 }

@@ -19,6 +19,9 @@ namespace audioCracker.Controls
         private Label estimatedTimeLabel;
         public ScottPlot.FormsPlot plot;
 
+        private NumericUpDown plotSecondsBox;
+
+
         private AnalysisManager analysisManager;
 
         private string estimatedLabelTemplate = "Estimated time: {0:D2}m{1:D2}s";
@@ -33,7 +36,8 @@ namespace audioCracker.Controls
             Panel loadingPanel,
             Label estimatedTimeLabel,
             Button analysisButton,
-            ScottPlot.FormsPlot plot) {
+            ScottPlot.FormsPlot plot,
+            NumericUpDown plotSecondsBox) {
             this.analysisManager = analysisManager;
             this.form = form;
             this.playButton = playButton;
@@ -44,6 +48,7 @@ namespace audioCracker.Controls
             this.estimatedTimeLabel = estimatedTimeLabel;
             this.analysisButton = analysisButton;
             this.plot = plot;
+            this.plotSecondsBox = plotSecondsBox;
         }
 
         public void ResetPlot()
@@ -66,6 +71,7 @@ namespace audioCracker.Controls
             this.stopButton.Enabled = enabled;
             this.fileButton.Enabled = enabled;
             this.plotComboBox.Enabled = enabled;
+            this.plotSecondsBox.Enabled = enabled;
             this.analysisButton.Enabled = this.plotComboBox.SelectedIndex >= 0 && enabled;  
         }
 
@@ -73,6 +79,7 @@ namespace audioCracker.Controls
         {
             this.fileButton.Enabled = enabled;
             this.plotComboBox.Enabled = enabled;
+            this.plotSecondsBox.Enabled = enabled;
             this.analysisButton.Enabled = this.plotComboBox.SelectedIndex >= 0 && enabled; ;
         }
 
