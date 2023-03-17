@@ -22,7 +22,7 @@ namespace audioCracker.Decoder
         public IEnumerable<IEnumerable<float>> GetFrameDividedAmplitudes(string path, int durationInMs)
         {
             var amps = this.decoder.ReadAmplitudesFromFile(path);
-            return this.DivideIntoFrames(amps, durationInMs);
+            return this.DivideIntoFrames(Normalize(amps), durationInMs);
         }
 
         private IEnumerable<IEnumerable<float>> DivideIntoFrames(IEnumerable<float> amplitudes, int durationInMs)
@@ -48,6 +48,13 @@ namespace audioCracker.Decoder
 
             return frames;
 
+        }
+
+        private IEnumerable<float> Normalize(IEnumerable<float> amplitudes)
+        {
+            var max = amplitudes.Select(a => Math.Abs(a)).Max();
+
+            return amplitudes.Select(a => a / max);
         }
 
     }

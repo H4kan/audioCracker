@@ -39,6 +39,7 @@ namespace audioCracker.Decoder
         public void LoadFramesFromFile(string filename, int durationInMs)
         {
             this.frames = this.frameMerger.GetFrameDividedAmplitudes(filename, durationInMs);
+            var maxies = this.frames.Select(f => f.Select(g => Math.Abs(g))).Select(f => f.Max());
         }
 
 

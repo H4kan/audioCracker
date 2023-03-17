@@ -1,4 +1,5 @@
-﻿using System;
+﻿using audioCracker.Analysis.Frame.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,10 @@ namespace audioCracker.Analysis
         public double ConductAnalysis(IEnumerable<float> data)
         {
             var listedData = data.ToList();
+            if (!Voicing.IsVoicedFrame(listedData))
+            {
+                return 0;
+            }
             var currCorr = 0.0;
             var prevCorr = double.MaxValue;
             int maxFreq = 0;

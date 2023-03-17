@@ -18,7 +18,7 @@ namespace audioCracker.Analysis
         private bool[] nonSilentFrames;
 
         private double volumeCond = 0.1;
-        private double zcrCond = 0.01;
+        private double zcrCond = 0.1;
 
         public bool isLoaded = false;
 
@@ -41,7 +41,7 @@ namespace audioCracker.Analysis
 
         private bool IsNonSilent(double volume, double zcr)
         {
-            return volume > volumeCond || zcr > zcrCond;
+            return volume > volumeCond && zcr < zcrCond;
         }
 
         public void ConductSilenceAnalysis()
@@ -72,10 +72,12 @@ namespace audioCracker.Analysis
         public IEnumerable<double> GetProcessedFrames(IEnumerable<double> processedFrames, int startFrame, int endFrame)
         {
             var procRange = processedFrames.Skip(startFrame).Take(endFrame - startFrame).ToArray();
+
+            var nonSilentConst = procRange.Max() * 0.5;
             var silenceRange = nonSilentFrames.Skip(startFrame).Take(endFrame - startFrame).ToArray();
             for (int i = 0; i < procRange.Count(); i++)
             {
-                yield return silenceRange[i] ? 0.0 : procRange[i];
+                yield return silenceRange[i] ? nonSilentConst : 0.0;
             }
         }
 

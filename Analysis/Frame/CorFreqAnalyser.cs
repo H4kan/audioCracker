@@ -1,4 +1,5 @@
-﻿using System;
+﻿using audioCracker.Analysis.Frame.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,10 +22,14 @@ namespace audioCracker.Analysis
         public double ConductAnalysis(IEnumerable<float> data)
         {
             var listedData = data.ToList();
+            if (!Voicing.IsVoicedFrame(listedData))
+            {
+                return 0;
+            }
             var currCorr = 0.0;
             var prevCorr = 0.0;
-            int maxFreq = 0;
-            for (int freq = 100; freq < maxDelay; freq++)
+            int maxFreq = 50;
+            for (int freq = 50; freq < maxDelay; freq++)
             {
                 currCorr = EvaluateFreqCorrelation(listedData, freq);
                 if (currCorr > prevCorr)
@@ -41,7 +46,7 @@ namespace audioCracker.Analysis
         {
             double sum = 0.0;
 
-            for (int i = 0; i < data.Count() - maxDelay; i++)
+            for (int i = 0; i < maxDelay; i++)
             {
                 sum += data[i] * data[i + freq];
             }
