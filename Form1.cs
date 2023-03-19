@@ -22,6 +22,8 @@ namespace audioCracker
         private ControlManager controlManager;
         private AnalysisManager analysisManager;
 
+        private string filePath = "";
+
         private void setupUIComponents()
         {
             this.openFileDialog = new OpenFileDialog();
@@ -37,11 +39,12 @@ namespace audioCracker
                 this.estimatedTimeLabel,
                 this.analysisButton,
                 this.dataPlot,
-                this.plotSecondsBox);
+                this.plotSecondsBox,
+                this.savePlotBtn);
 
             this.timeManager = new TimeManager();
 
-            this.plotManager = new PlotManager(this.dataPlot, this.timeManager, this.controlManager, this.analysisManager);
+            this.plotManager = new PlotManager(this.dataPlot, this.timeManager, this.controlManager, this.analysisManager, this.savePlotBtn);
 
             this.soundPlayer = new Wavplayer(this.playButton, this.stopButton, 
                 this.durationLabel, this.currentLabel, this.timeManager, this.controlManager, this.plotManager);
@@ -58,6 +61,7 @@ namespace audioCracker
                 try
                 {
                     this.fileLabel.Text = openFileDialog.SafeFileName;
+                    this.filePath = openFileDialog.FileName;
                     this.soundPlayer.Setup(openFileDialog.FileName);
                     this.controlManager.ResetPlot();
                     this.plotManager.LoadFile(openFileDialog.FileName, this.soundPlayer.GetDurationInMs());
@@ -118,6 +122,11 @@ namespace audioCracker
         private void silenceCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             this.plotManager.EnableSilence(this.silenceCheckBox.Checked);
+        }
+
+        private void savePlotBtn_Click(object sender, EventArgs e)
+        {
+            this.plotManager.SavePlot(this.filePath);
         }
     }
 }

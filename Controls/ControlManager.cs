@@ -17,6 +17,7 @@ namespace audioCracker.Controls
         private ComboBox plotComboBox;
         private Panel loadingPanel;
         private Label estimatedTimeLabel;
+        private Button savePlotButton;
         public ScottPlot.FormsPlot plot;
 
         private NumericUpDown plotSecondsBox;
@@ -37,7 +38,8 @@ namespace audioCracker.Controls
             Label estimatedTimeLabel,
             Button analysisButton,
             ScottPlot.FormsPlot plot,
-            NumericUpDown plotSecondsBox) {
+            NumericUpDown plotSecondsBox,
+            Button savePlotButton) {
             this.analysisManager = analysisManager;
             this.form = form;
             this.playButton = playButton;
@@ -49,11 +51,13 @@ namespace audioCracker.Controls
             this.analysisButton = analysisButton;
             this.plot = plot;
             this.plotSecondsBox = plotSecondsBox;
+            this.savePlotButton = savePlotButton;
         }
 
         public void ResetPlot()
         {
             this.plot.Visible = false;
+            this.savePlotButton.Enabled = false;
             this.analysisButton.Enabled = false;
             this.plotComboBox.SelectedIndex = -1;
         }
@@ -80,7 +84,7 @@ namespace audioCracker.Controls
             this.fileButton.Enabled = enabled;
             this.plotComboBox.Enabled = enabled;
             this.plotSecondsBox.Enabled = enabled;
-            this.analysisButton.Enabled = this.plotComboBox.SelectedIndex >= 0 && enabled; ;
+            this.analysisButton.Enabled = this.plotComboBox.SelectedIndex >= 0 && enabled;
         }
 
         public void ShowInitialLoadingPanel(bool show = true)

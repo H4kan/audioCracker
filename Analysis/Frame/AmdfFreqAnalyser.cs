@@ -27,8 +27,8 @@ namespace audioCracker.Analysis
             }
             var currCorr = 0.0;
             var prevCorr = double.MaxValue;
-            int maxFreq = 0;
-            for (int freq = 100; freq < maxDelay; freq++)
+            int maxFreq = 50;
+            for (int freq = 50; freq < maxDelay; freq++)
             {
                 currCorr = EvaluateFreqCorrelation(listedData, freq);
                 if (currCorr < prevCorr)

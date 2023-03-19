@@ -16,6 +16,7 @@ namespace audioCracker.Controls
 
         private FormsPlot dataPlot;
         private TimeManager timeManager;
+        private Button savePlotButton;
 
         private double[] displayedX;
         private double[] actualX;
@@ -50,14 +51,15 @@ namespace audioCracker.Controls
 
         private bool silenceShown = false;
 
-        public PlotManager(FormsPlot dataPlot, TimeManager timeManager, ControlManager controlManager, AnalysisManager analysisManager) {
+        public PlotManager(FormsPlot dataPlot, TimeManager timeManager, ControlManager controlManager, 
+            AnalysisManager analysisManager, Button savePlotButton) {
             this.dataPlot = dataPlot;
             this.timeManager = timeManager;
             this.frameProcessor = new FrameProcessor(this, controlManager);
             this.clipProcessor = new ClipProcessor(this.frameProcessor);
             this.silenceManager = new SilenceManager(this, controlManager);
             this.analysisManager = analysisManager;
-
+            this.savePlotButton = savePlotButton;
 
             this.dataPlot.Plot.XLabel("Time [s]");
 
@@ -105,7 +107,7 @@ namespace audioCracker.Controls
             else
             { 
                 this.clipLoaded = false;
-                this.frameProcessor.StartAnalysis();
+                _ = this.frameProcessor.StartAnalysis();
             }
             if (this.silenceShown)
             {
@@ -181,6 +183,14 @@ namespace audioCracker.Controls
 
    
             this.dataPlot.Visible = true;
+            this.savePlotButton.Enabled = true;
+        }
+
+        public void SavePlot(string filePath)
+        {
+            this.dataPlot.Plot.Style(figureBackground: Color.White);
+            var bmp = this.dataPlot.Plot.Render();
+            bmp.Save(filePath.Replace(".wav", ".jpg"));;
         }
 
         private void SetupYTick()
