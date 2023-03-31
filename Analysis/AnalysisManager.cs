@@ -1,4 +1,5 @@
 ﻿using audioCracker.Analysis.Clip;
+using audioCracker.Analysis.Frame;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace audioCracker.Analysis
         {
             this.clipFrameAnalysers = new List<(string, IFrameAnalyser, IClipAnalyser?, string)>()
             {
+                new ("Signal", new ForwardAnalyser(), null, "Amplitudes"),
                 new ("Volume", new VolumeAnalyser(), null, "Volume"),
                 new ("STE", new STEAnalyser(), null, "Energy"),
                 new ("ZCR", new ZCRAnalyser(), null, "Crossing zero count"),
