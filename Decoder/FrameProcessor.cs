@@ -19,7 +19,7 @@ namespace audioCracker.Decoder
 
         public IFrameAnalyser currentAnalyser;
 
-        private FrameMerger frameMerger;
+        public FrameMerger frameMerger;
 
         public IEnumerable<IEnumerable<float>> frames;
 
@@ -86,6 +86,11 @@ namespace audioCracker.Decoder
         public (double, double) GetRange()
         {
             return (this.processedFrames.Min(), this.processedFrames.Max());
+        }
+
+        public (double, double) GetSingleFrameRange()
+        {
+            return (0.0, 40.0);
         }
 
         public int GetEstimatedTime()

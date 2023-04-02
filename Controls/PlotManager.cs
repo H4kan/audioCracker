@@ -133,7 +133,37 @@ namespace audioCracker.Controls
 
         private void ShowPlotSingleFrame()
         {
+            var frameLen = FrameMerger.frameLenInMs;
+            if (this.currentPlot != null)
+            {
+                this.dataPlot.Plot.Remove(this.currentPlot);
+            }
 
+            this.displayedY = Enumerable.Range(0, frameLen).Select(t => (double)t).ToArray();
+            this.currentPlot = this.dataPlot.Plot.AddSignal(
+                displayedY,
+                1
+                );
+
+
+            var xTickPlot = Enumerable.Range(0, (frameLen + 1) / 10).Select(t => (double)10 * t);
+            var valueFormat = "F0";
+
+            this.dataPlot.Plot.XAxis.ManualTickPositions(xTickPlot.ToArray(), xTickPlot.Select(d => d.ToString(valueFormat)).ToArray());
+
+            var yRange = this.frameProcessor.GetSingleFrameRange();
+            var tickLength = (yRange.Item2 - yRange.Item1) / (yTicks - 1);
+
+            var yTickPlot = Enumerable.Range(0, yTicks).Select(i => yRange.Item1 + i * tickLength);
+
+            var valueFormat2 = tickLength < 0.01 ? "F3" : "F2";
+
+            this.dataPlot.Plot.YAxis.ManualTickPositions(yTickPlot.ToArray(), yTickPlot.Select(d => d.ToString(valueFormat2)).ToArray());
+
+            this.dataPlot.Refresh();
+
+            this.dataPlot.Visible = true;
+            this.savePlotButton.Enabled = true;
         }
 
         private void ShowPlotFrames()
