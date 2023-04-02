@@ -56,6 +56,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.savePlotBtn2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.frameUpDown = new System.Windows.Forms.NumericUpDown();
+            this.frameLabel = new System.Windows.Forms.Label();
+            this.frameSlider = new System.Windows.Forms.TrackBar();
             this.fileLabel2 = new System.Windows.Forms.Label();
             this.fileButton2 = new System.Windows.Forms.Button();
             this.analysisButton2 = new System.Windows.Forms.Button();
@@ -78,6 +81,8 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frameUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // loadingPanel2
@@ -425,7 +430,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.analysisButton2);
-            this.splitContainer2.Panel2.Controls.Add(loadingPanel2);
+            this.splitContainer2.Panel2.Controls.Add(this.loadingPanel2);
             this.splitContainer2.Panel2.Controls.Add(this.dataPlot2);
             this.splitContainer2.Panel2.Controls.Add(this.plotComboBox2);
             this.splitContainer2.Size = new System.Drawing.Size(1327, 661);
@@ -449,11 +454,56 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.frameUpDown);
+            this.panel1.Controls.Add(this.frameLabel);
+            this.panel1.Controls.Add(this.frameSlider);
             this.panel1.Controls.Add(this.fileLabel2);
             this.panel1.Location = new System.Drawing.Point(3, 128);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(442, 333);
             this.panel1.TabIndex = 0;
+            // 
+            // frameUpDown
+            // 
+            this.frameUpDown.Enabled = false;
+            this.frameUpDown.Location = new System.Drawing.Point(187, 153);
+            this.frameUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.frameUpDown.Name = "frameUpDown";
+            this.frameUpDown.Size = new System.Drawing.Size(150, 27);
+            this.frameUpDown.TabIndex = 4;
+            this.frameUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.frameUpDown.ValueChanged += new System.EventHandler(this.frameUpDown_ValueChanged);
+            // 
+            // frameLabel
+            // 
+            this.frameLabel.AutoSize = true;
+            this.frameLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.frameLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.frameLabel.Location = new System.Drawing.Point(99, 148);
+            this.frameLabel.Name = "frameLabel";
+            this.frameLabel.Size = new System.Drawing.Size(70, 28);
+            this.frameLabel.TabIndex = 3;
+            this.frameLabel.Text = "Frame:";
+            // 
+            // frameSlider
+            // 
+            this.frameSlider.Enabled = false;
+            this.frameSlider.Location = new System.Drawing.Point(43, 212);
+            this.frameSlider.Maximum = 100;
+            this.frameSlider.Minimum = 1;
+            this.frameSlider.Name = "frameSlider";
+            this.frameSlider.Size = new System.Drawing.Size(356, 56);
+            this.frameSlider.TabIndex = 2;
+            this.frameSlider.Value = 1;
+            this.frameSlider.Scroll += new System.EventHandler(this.frameSlider_Scroll);
             // 
             // fileLabel2
             // 
@@ -548,6 +598,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.frameUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -588,5 +641,8 @@
         private Label label12;
         private ScottPlot.FormsPlot dataPlot2;
         private ComboBox plotComboBox2;
+        private NumericUpDown frameUpDown;
+        private Label frameLabel;
+        private TrackBar frameSlider;
     }
 }

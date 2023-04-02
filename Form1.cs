@@ -11,7 +11,7 @@ namespace audioCracker
     public partial class Form1 : Form
     {
         private TimeViewLogic timeViewLogic;
-        private ViewLogic frequencyViewLogic;
+        private FrequencyViewLogic frequencyViewLogic;
 
         private ViewLogic currentLogic;
 
@@ -33,7 +33,7 @@ namespace audioCracker
                 savePlotBtn, durationLabel, currentLabel, 
                 fileLabel, silenceCheckBox);
 
-            this.frequencyViewLogic = new ViewLogic();
+            this.frequencyViewLogic = new FrequencyViewLogic();
 
             frequencyViewLogic.setupUIComponents(
                 this, new Button(), new Button(), fileButton2,
@@ -41,6 +41,8 @@ namespace audioCracker
                 analysisButton2, dataPlot2, new NumericUpDown(),
                 savePlotBtn2, new Label(), new Label(), 
                 fileLabel2, new CheckBox());
+
+            frequencyViewLogic.setupFrequencyViewLogic(frameUpDown, frameSlider);
 
             this.currentLogic = timeViewLogic;
         }
@@ -121,6 +123,11 @@ namespace audioCracker
                     this.currentLogic.plotManager.LoadFile(this.currentLogic.openFileDialog.FileName,
                         this.currentLogic.soundPlayer.GetDurationInMs());
 
+                    this.currentLogic.frameSlider.Enabled = true;
+                    this.currentLogic.frameUpDown.Enabled = true;
+
+                    this.currentLogic.frameControlManager.SetBoundary(this.currentLogic.plotManager.GetFrameLen());
+
                 }
                 catch (SecurityException ex)
                 {
@@ -195,6 +202,18 @@ namespace audioCracker
                     break;
 
             }
+        }
+
+        private void frameSlider_Scroll(object sender, EventArgs e)
+        {
+            this.currentLogic.frameUpDown.Value = this.currentLogic.frameSlider.Value;
+            this.currentLogic.plotManager.currentFrame = this.currentLogic.frameSlider.Value;
+        }
+
+        private void frameUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            this.currentLogic.frameSlider.Value = (int)this.currentLogic.frameUpDown.Value;
+            this.currentLogic.plotManager.currentFrame = this.currentLogic.frameSlider.Value;
         }
     }
 }

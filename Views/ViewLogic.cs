@@ -27,6 +27,11 @@ namespace audioCracker.Views
         public CheckBox silenceCheckBox;
         public NumericUpDown plotSecondsBox;
 
+        public NumericUpDown frameUpDown = new NumericUpDown();
+        public TrackBar frameSlider = new TrackBar();
+
+        public FrameControlManager frameControlManager;
+
         public virtual void setupUIComponents(Form form, Button playButton,
             Button stopButton, Button fileButton,
             ComboBox plotComboBox, Panel loadingPanel,
@@ -74,6 +79,8 @@ namespace audioCracker.Views
 
             this.controlManager.InitializeControls();
 
-        }
+            this.frameControlManager = new FrameControlManager(this.frameUpDown, this.frameSlider);
+
+    }
     }
 }

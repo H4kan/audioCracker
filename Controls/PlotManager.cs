@@ -51,6 +51,8 @@ namespace audioCracker.Controls
 
         private bool silenceShown = false;
 
+        public int? currentFrame;
+
         public PlotManager(FormsPlot dataPlot, TimeManager timeManager, ControlManager controlManager, 
             AnalysisManager analysisManager, Button savePlotButton) {
             this.dataPlot = dataPlot;
@@ -119,6 +121,23 @@ namespace audioCracker.Controls
 
         public void ShowPlot()
         {
+            if (this.currentFrame.HasValue)
+            {
+                this.ShowPlotSingleFrame();
+            }
+            else
+            {
+                this.ShowPlotFrames();
+            }
+        }
+
+        private void ShowPlotSingleFrame()
+        {
+
+        }
+
+        private void ShowPlotFrames()
+        {
             if (this.clipLoaded)
             {
                 this.actualX = Enumerable.Range(0, clipsPerPlot).Select(n => (double)n).ToArray();
@@ -145,7 +164,7 @@ namespace audioCracker.Controls
                     this.nonSilentY = this.silenceManager.GetProcessedFrames(this.frameProcessor.processedFrames, startIdx, endIdx).ToArray();
                 }
             }
-            
+
 
             if (this.currentPlot != null)
             {
@@ -169,7 +188,7 @@ namespace audioCracker.Controls
                     Color.Yellow
                     );
             }
-     
+
 
             this.SetupXTick();
             this.SetupYTick();
@@ -181,7 +200,7 @@ namespace audioCracker.Controls
                 this.timeManager.perSecondTimer.Tick += this.currentHandler;
             }
 
-   
+
             this.dataPlot.Visible = true;
             this.savePlotButton.Enabled = true;
         }
@@ -191,6 +210,11 @@ namespace audioCracker.Controls
             this.dataPlot.Plot.Style(figureBackground: Color.White);
             var bmp = this.dataPlot.Plot.Render();
             bmp.Save(filePath.Replace(".wav", ".jpg"));;
+        }
+
+        public int GetFrameLen()
+        {
+            return this.frameProcessor.GetFrameNumber();
         }
 
         private void SetupYTick()

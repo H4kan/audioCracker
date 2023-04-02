@@ -42,6 +42,10 @@ namespace audioCracker.Decoder
             var maxies = this.frames.Select(f => f.Select(g => Math.Abs(g))).Select(f => f.Max());
         }
 
+        public int GetFrameNumber()
+        {
+            return this.frames.Count();
+        }
 
         public void SetAnalyser(IFrameAnalyser analyser)
         {
