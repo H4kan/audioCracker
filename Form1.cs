@@ -1,6 +1,7 @@
 using audioCracker.Analysis;
 using audioCracker.Controls;
 using audioCracker.Loading;
+using audioCracker.Views;
 using System.Media;
 using System.Security;
 using System.Windows.Forms;
@@ -9,62 +10,116 @@ namespace audioCracker
 {
     public partial class Form1 : Form
     {
+        private TimeViewLogic timeViewLogic;
+        private ViewLogic frequencyViewLogic;
+
+        private ViewLogic currentLogic;
+
         public Form1()
         {
             InitializeComponent();
-            this.setupUIComponents();
+            this.setupViews();
         }
 
-        private OpenFileDialog openFileDialog;
-        private Wavplayer soundPlayer;
-        private PlotManager plotManager;
-        private TimeManager timeManager;
-        private ControlManager controlManager;
-        private AnalysisManager analysisManager;
-
-        private string filePath = "";
-
-        private void setupUIComponents()
+        private void setupViews()
         {
-            this.openFileDialog = new OpenFileDialog();
-            this.openFileDialog.Filter = "wav files (*.wav)|*.wav|All files (*.*)|*.*;";
+             this.timeViewLogic = new TimeViewLogic();
+           
 
-            this.analysisManager = new AnalysisManager();
-            this.controlManager = new ControlManager(
-                this.analysisManager,
-                this,
-                this.playButton, 
-                this.stopButton, this.fileButton, 
-                this.plotComboBox, this.loadingPanel,
-                this.estimatedTimeLabel,
-                this.analysisButton,
-                this.dataPlot,
-                this.plotSecondsBox,
-                this.savePlotBtn);
+            timeViewLogic.setupUIComponents(
+                this, playButton, stopButton, fileButton,
+                plotComboBox, loadingPanel, estimatedTimeLabel,
+                analysisButton, dataPlot, plotSecondsBox,
+                savePlotBtn, durationLabel, currentLabel, 
+                fileLabel, silenceCheckBox);
 
-            this.timeManager = new TimeManager();
+            this.frequencyViewLogic = new ViewLogic();
 
-            this.plotManager = new PlotManager(this.dataPlot, this.timeManager, this.controlManager, this.analysisManager, this.savePlotBtn);
+            frequencyViewLogic.setupUIComponents(
+                this, new Button(), new Button(), fileButton2,
+                plotComboBox2, loadingPanel2, estimatedTimeLabel2,
+                analysisButton2, dataPlot2, new NumericUpDown(),
+                savePlotBtn2, new Label(), new Label(), 
+                fileLabel2, new CheckBox());
 
-            this.soundPlayer = new Wavplayer(this.playButton, this.stopButton, 
-                this.durationLabel, this.currentLabel, this.timeManager, this.controlManager, this.plotManager);
-
-            this.plotManager.ChangeSecondsOnPlot((int)this.plotSecondsBox.Value + 1);
-            
-            this.controlManager.InitializeControls();
+            this.currentLogic = timeViewLogic;
         }
+
 
         private void fileButton_Click(object sender, EventArgs e)
         {
-            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
+            this.fileButtonClick();
+        }
+
+        private void playButton_Click(object sender, EventArgs e)
+        {
+            this.playButtonClick();
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            this.stopButtonClick();
+        }
+
+        private void analysisButton_Click(object sender, EventArgs e)
+        {
+            this.analysisButtonClick();
+        }
+
+        private void plotComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.plotComboBoxSelectedIndexChange();
+        }
+
+        private void plotSecondsBox_ValueChanged(object sender, EventArgs e)
+        {
+            this.plotSecondsBoxValueChange();
+        }
+
+        private void silenceCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            this.silenceCheckBoxChange();
+        }
+
+        private void savePlotBtn_Click(object sender, EventArgs e)
+        {
+            this.savePlot();
+        }
+
+        private void fileButton2_Click(object sender, EventArgs e)
+        {
+            this.fileButtonClick();
+        }
+
+        private void savePlotBtn2_Click(object sender, EventArgs e)
+        {
+            this.savePlot();
+        }
+
+        private void analysisButton2_Click(object sender, EventArgs e)
+        {
+            this.analysisButtonClick();
+        }
+
+        private void plotComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.plotComboBoxSelectedIndexChange();
+        }
+
+        private void fileButtonClick()
+        {
+            if (this.currentLogic.openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    this.fileLabel.Text = openFileDialog.SafeFileName;
-                    this.filePath = openFileDialog.FileName;
-                    this.soundPlayer.Setup(openFileDialog.FileName);
-                    this.controlManager.ResetPlot();
-                    this.plotManager.LoadFile(openFileDialog.FileName, this.soundPlayer.GetDurationInMs());
+                    this.currentLogic.fileLabel.Text = this.currentLogic.openFileDialog.SafeFileName;
+                    this.currentLogic.filePath = this.currentLogic.openFileDialog.FileName;
+
+                    this.currentLogic.soundPlayer.Setup(this.currentLogic.openFileDialog.FileName);
+
+                    this.currentLogic.controlManager.ResetPlot();
+                    this.currentLogic.plotManager.LoadFile(this.currentLogic.openFileDialog.FileName,
+                        this.currentLogic.soundPlayer.GetDurationInMs());
 
                 }
                 catch (SecurityException ex)
@@ -75,58 +130,71 @@ namespace audioCracker
             }
         }
 
-        private void playButton_Click(object sender, EventArgs e)
+        private void playButtonClick()
         {
-            this.soundPlayer.Play();
-            
+            this.currentLogic.soundPlayer.Play();
         }
 
-        private void stopButton_Click(object sender, EventArgs e)
+        private void stopButtonClick()
         {
-            this.soundPlayer.Stop();
+            this.currentLogic.soundPlayer.Stop();
         }
 
-        private void analysisButton_Click(object sender, EventArgs e)
+        private void analysisButtonClick()
         {
-            this.soundPlayer.Stop();
+            this.currentLogic.soundPlayer.Stop();
 
-            this.plotManager.StartAnalysis();
+            this.currentLogic.plotManager.StartAnalysis();
         }
 
-        private void plotComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void plotComboBoxSelectedIndexChange()
         {
-            if (this.plotComboBox.SelectedIndex >= 0)
+            if (this.currentLogic.plotComboBox.SelectedIndex >= 0)
             {
-                this.analysisButton.Enabled = true;
+                this.currentLogic.analysisButton.Enabled = true;
 #pragma warning disable CS8604 // Possible null reference argument.
-                this.analysisManager.ChangeAnalyser(this.plotComboBox.SelectedItem.ToString());
+                this.currentLogic.analysisManager.ChangeAnalyser(this.currentLogic.plotComboBox.SelectedItem.ToString());
 #pragma warning restore CS8604 // Possible null reference argument.
-                if (this.analysisManager.GetAnalyser().Item2 != null)
+                if (this.currentLogic.analysisManager.GetAnalyser().Item2 != null)
                 {
-                    this.silenceCheckBox.Checked = false;
-                    this.silenceCheckBox.Enabled = false;
-                    this.plotManager.EnableSilence(false);
+                    this.currentLogic.silenceCheckBox.Checked = false;
+                    this.currentLogic.silenceCheckBox.Enabled = false;
+                    this.currentLogic.plotManager.EnableSilence(false);
                 }
                 else
                 {
-                    this.silenceCheckBox.Enabled = true;
+                    this.currentLogic.silenceCheckBox.Enabled = true;
                 }
             }
         }
 
-        private void plotSecondsBox_ValueChanged(object sender, EventArgs e)
+        private void plotSecondsBoxValueChange()
         {
-            this.plotManager.ChangeSecondsOnPlot((int)this.plotSecondsBox.Value + 1);
+            this.currentLogic.plotManager.ChangeSecondsOnPlot((int)this.currentLogic.plotSecondsBox.Value + 1);
         }
 
-        private void silenceCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void silenceCheckBoxChange()
         {
-            this.plotManager.EnableSilence(this.silenceCheckBox.Checked);
+            this.currentLogic.plotManager.EnableSilence(this.silenceCheckBox.Checked);
         }
 
-        private void savePlotBtn_Click(object sender, EventArgs e)
+        private void savePlot()
         {
-            this.plotManager.SavePlot(this.filePath);
+            this.currentLogic.plotManager.SavePlot(this.currentLogic.filePath);
+        }
+
+        private void viewControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(this.viewControl.SelectedIndex)
+            {
+                case 0:
+                    this.currentLogic = this.timeViewLogic;
+                    break;
+                case 1:
+                    this.currentLogic = this.frequencyViewLogic;
+                    break;
+
+            }
         }
     }
 }
