@@ -63,7 +63,7 @@ namespace audioCracker.Controls
             this.analysisManager = analysisManager;
             this.savePlotButton = savePlotButton;
 
-            this.dataPlot.Plot.XLabel("Time [s]");
+
 
             this.framesPerSecond = 25;
             this.clipsPerSecond =  this.framesPerSecond / this.clipProcessor.framesPerClip;
@@ -72,6 +72,15 @@ namespace audioCracker.Controls
             this.IsLoaded = false;
         }
 
+        public void SetForTime()
+        {
+            this.dataPlot.Plot.XLabel("Time [s]");
+        }
+
+        public void SetForFrequency()
+        {
+            this.dataPlot.Plot.XLabel("Frequency [Hz]");
+        }
 
         public void EnableSilence(bool enable = true)
         {
@@ -94,6 +103,18 @@ namespace audioCracker.Controls
 
         public void StartAnalysis()
         {
+            if (this.currentFrame.HasValue)
+            {
+                this.StartAnalysisSingleFrame();
+            }
+            else
+            {
+                this.StartAnalysisFrames();
+            }
+        }
+
+        public void StartAnalysisFrames()
+        {
             this.dataPlot.Plot.YLabel(this.analysisManager.GetYLabel());
 
             var analysers = this.analysisManager.GetAnalyser();
@@ -107,7 +128,7 @@ namespace audioCracker.Controls
                 this.clipProcessor.StartAnalysis();
             }
             else
-            { 
+            {
                 this.clipLoaded = false;
                 _ = this.frameProcessor.StartAnalysis();
             }
@@ -115,6 +136,21 @@ namespace audioCracker.Controls
             {
                 this.silenceManager.ConductSilenceAnalysis();
             }
+
+            this.IsLoaded = true;
+        }
+
+        private void StartAnalysisSingleFrame()
+        {
+            this.dataPlot.Plot.YLabel(this.analysisManager.GetYLabel());
+
+            var analysers = this.analysisManager.GetAnalyser();
+
+            this.frameProcessor.SetAnalyser(analysers.Item1);
+
+            this.clipLoaded = false;
+
+            _ = this.frameProcessor.StartFrameAnalysis(this.currentFrame.Value);
 
             this.IsLoaded = true;
         }
@@ -139,17 +175,20 @@ namespace audioCracker.Controls
                 this.dataPlot.Plot.Remove(this.currentPlot);
             }
 
-            this.displayedY = Enumerable.Range(0, frameLen).Select(t => (double)t).ToArray();
+            this.displayedY = this.frameProcessor.GetProcessedFrame().ToArray();
             this.currentPlot = this.dataPlot.Plot.AddSignal(
-                displayedY,
+                this.displayedY,
                 1
                 );
 
+            var frameLenInTicks = this.displayedY.Count();
+            var actualXTickPlot = Enumerable.Range(0, (frameLen) / 10).Select(t => (double)10 * t).Select(i => i * frameLenInTicks / frameLen);
+            var displayedXTickPlot = Enumerable.Range(0, (frameLen) / 10).Select(t => (double)10 * t);
 
-            var xTickPlot = Enumerable.Range(0, (frameLen + 1) / 10).Select(t => (double)10 * t);
+
             var valueFormat = "F0";
 
-            this.dataPlot.Plot.XAxis.ManualTickPositions(xTickPlot.ToArray(), xTickPlot.Select(d => d.ToString(valueFormat)).ToArray());
+            this.dataPlot.Plot.XAxis.ManualTickPositions(actualXTickPlot.ToArray(), displayedXTickPlot.Select(d => d.ToString(valueFormat)).ToArray());
 
             var yRange = this.frameProcessor.GetSingleFrameRange();
             var tickLength = (yRange.Item2 - yRange.Item1) / (yTicks - 1);

@@ -9,5 +9,7 @@ namespace audioCracker.Analysis
     public interface IFrameAnalyser
     {
         public double ConductAnalysis(IEnumerable<float> data);
+
+        public double[] ConductFrameAnalysis(IEnumerable<float> data);
     }
 }

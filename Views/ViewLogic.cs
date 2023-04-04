@@ -54,7 +54,11 @@ namespace audioCracker.Views
             this.openFileDialog = new OpenFileDialog();
             this.openFileDialog.Filter = "wav files (*.wav)|*.wav|All files (*.*)|*.*;";
 
-            this.analysisManager = new AnalysisManager();
+            if (this.analysisManager == null)
+            {
+                this.analysisManager = new AnalysisManager();
+            }
+
             this.controlManager = new ControlManager(
                 this.analysisManager,
                 form,

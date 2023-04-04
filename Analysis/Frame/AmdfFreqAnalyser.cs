@@ -59,5 +59,10 @@ namespace audioCracker.Analysis
             }
             return sum;
         }
+
+        public double[] ConductFrameAnalysis(IEnumerable<float> data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

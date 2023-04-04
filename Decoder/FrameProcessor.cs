@@ -25,6 +25,8 @@ namespace audioCracker.Decoder
 
         public double[] processedFrames;
 
+        public double[] processedFrame;
+
         private int estimatedTimeInSeconds;
 
         private const int numOfThreads = 8;
@@ -67,6 +69,16 @@ namespace audioCracker.Decoder
             await this.FreeLoading();
         }
 
+        public async Task StartFrameAnalysis(int currentFrame)
+        {
+            this.loaderManager.InitLoading();
+
+            this.SetupFrame();
+            this.loaderManager.StartLoading();
+
+            await this.FreeFrameLoading(currentFrame);
+        }
+
         public void SetupFrames()
         {
             this.framesPerThread = this.frames.Count() / numOfThreads;
@@ -78,9 +90,19 @@ namespace audioCracker.Decoder
             this.processedFrames = new double[this.frames.Count()];
         }
 
+        public void SetupFrame()
+        {
+            this.processedFrame = new double[this.frames.ElementAt(0).Count()];
+        }
+
         public IEnumerable<double> GetProcessedFrames(int startFrame, int endFrame)
         {
             return this.processedFrames.Skip(startFrame).Take(endFrame - startFrame);
+        }
+
+        public IEnumerable<double> GetProcessedFrame()
+        {
+            return this.processedFrame;
         }
 
         public (double, double) GetRange()
@@ -90,7 +112,7 @@ namespace audioCracker.Decoder
 
         public (double, double) GetSingleFrameRange()
         {
-            return (0.0, 40.0);
+            return (0.0, FrameMerger.frameLenInMs);
         }
 
         public int GetEstimatedTime()
@@ -143,6 +165,11 @@ namespace audioCracker.Decoder
             await Task.Run( async () => { await this.ConductAnalysis(); });
         }
 
+        private async Task FreeFrameLoading(int currentFrame)
+        {
+            await Task.Run(async () => { await this.ConductFrameAnalysis(currentFrame); });
+        }
+
         private async Task<bool> ConductAnalysis()
         {
             var tasks = Enumerable.Range(0, numOfThreads).Select(it => Task.Run(() =>
@@ -156,6 +183,18 @@ namespace audioCracker.Decoder
             this.loaderManager.StopLoading();
 
 
+
+            return true;
+        }
+
+        private async Task<bool> ConductFrameAnalysis(int currentFrame)
+        {
+            await Task.Run(() =>
+            {
+                this.currentAnalyser.ConductFrameAnalysis(this.frames.ElementAt(currentFrame)).CopyTo(this.processedFrame, 0);
+            });
+
+            this.loaderManager.StopLoading();
 
             return true;
         }

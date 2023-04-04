@@ -23,11 +23,14 @@ namespace audioCracker.Views
             Label fileLabel, CheckBox silenceCheckBox)
             
         {
+            this.analysisManager = new FrameAnalysisManager();
+
             base.setupUIComponents(form, playButton, stopButton,fileButton, plotComboBox, loadingPanel,
                 estimatedTimeLabel, analysisButton, dataPlot, plotSecondsBox, savePlotBtn, durationLabel, currentLabel, 
                 fileLabel, silenceCheckBox);
+         
 
-
+            this.plotManager.SetForFrequency();
         }
 
         public void setupFrequencyViewLogic(NumericUpDown frameUpDown, TrackBar frameSlider)

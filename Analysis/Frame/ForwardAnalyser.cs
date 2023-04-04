@@ -8,5 +8,10 @@ namespace audioCracker.Analysis.Frame
         {
             return data.Average(d => d);
         }
+
+        public double[] ConductFrameAnalysis(IEnumerable<float> data)
+        {
+            return data.Select(d => (double)d).ToArray();
+        }
     }
 }

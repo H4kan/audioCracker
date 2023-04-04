@@ -27,7 +27,7 @@ namespace audioCracker.Views
                 estimatedTimeLabel, analysisButton, dataPlot, plotSecondsBox, savePlotBtn, durationLabel, currentLabel, 
                 fileLabel, silenceCheckBox);
 
-
+            this.plotManager.SetForTime();
         }
     }
 }

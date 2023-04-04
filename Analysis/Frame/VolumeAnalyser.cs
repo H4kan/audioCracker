@@ -12,5 +12,10 @@ namespace audioCracker.Analysis
         {
             return Math.Sqrt(data.Average(d => d * d));
         }
+
+        public double[] ConductFrameAnalysis(IEnumerable<float> data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

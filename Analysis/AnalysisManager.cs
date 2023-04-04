@@ -10,9 +10,9 @@ namespace audioCracker.Analysis
 {
     public class AnalysisManager
     {
-        private List<(string, IFrameAnalyser, IClipAnalyser?, string)> clipFrameAnalysers;
+        protected List<(string, IFrameAnalyser, IClipAnalyser?, string)> clipFrameAnalysers;
 
-        private (string, IFrameAnalyser, IClipAnalyser?, string) currentAnalyser;
+        protected (string, IFrameAnalyser, IClipAnalyser?, string) currentAnalyser;
 
         public AnalysisManager()
         {
