@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace audioCracker.Analysis
 {
-    public class STEAnalyser : IFrameAnalyser
+    public class STEAnalyser : FrameAnalyser
     {
-        public double ConductAnalysis(IEnumerable<float> data)
+
+        public override double ConductAnalysis(IEnumerable<float> data)
         {
             return data.Average(d => d * d);
-        }
-
-        public double[] ConductFrameAnalysis(IEnumerable<float> data)
-        {
-            throw new NotImplementedException();
         }
     }
 }

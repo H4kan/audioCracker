@@ -29,16 +29,15 @@ namespace audioCracker.Views
                 estimatedTimeLabel, analysisButton, dataPlot, plotSecondsBox, savePlotBtn, durationLabel, currentLabel, 
                 fileLabel, silenceCheckBox);
          
-
-            this.plotManager.SetForFrequency();
         }
 
-        public void setupFrequencyViewLogic(NumericUpDown frameUpDown, TrackBar frameSlider)
+        public void setupFrequencyViewLogic(NumericUpDown frameUpDown, TrackBar frameSlider, NumericUpDown lengthUpDown)
         {
             this.frameSlider = frameSlider;
             this.frameUpDown = frameUpDown;
             this.frameControlManager = new FrameControlManager(frameUpDown, frameSlider);
             this.plotManager.currentFrame = 0;
+            this.lengthUpDown = lengthUpDown;
         }
 
     }

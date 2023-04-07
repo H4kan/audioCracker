@@ -1,4 +1,5 @@
 ﻿using audioCracker.Analysis.Frame.Helpers;
+using audioCracker.Decoder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace audioCracker.Analysis
 {
-    public class AmdfFreqAnalyser : IFrameAnalyser
+    public class AmdfFreqAnalyser : FrameAnalyser
     {
 
         private int framesPerSecond;
         private const int maxDelay = 1000;
 
         public AmdfFreqAnalyser() {
-            this.framesPerSecond = 25;
+            this.framesPerSecond = 1000 / FrameMerger.frameLenInMs;
         }
 
 
-        public double ConductAnalysis(IEnumerable<float> data)
+        public override double ConductAnalysis(IEnumerable<float> data)
         {
             var listedData = data.ToList();
-            if (!Voicing.IsVoicedFrame(listedData))
+            if (!Helpers.IsVoicedFrame(listedData))
             {
                 return 0;
             }
@@ -60,9 +61,5 @@ namespace audioCracker.Analysis
             return sum;
         }
 
-        public double[] ConductFrameAnalysis(IEnumerable<float> data)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

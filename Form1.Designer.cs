@@ -28,581 +28,606 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.estimatedTimeLabel2 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.fileButton = new System.Windows.Forms.Button();
-            this.fileLabel = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.savePlotBtn = new System.Windows.Forms.Button();
-            this.playPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.currentLabel = new System.Windows.Forms.Label();
-            this.durationLabel = new System.Windows.Forms.Label();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.playButton = new System.Windows.Forms.Button();
-            this.silenceCheckBox = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.plotSecondsBox = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.analysisButton = new System.Windows.Forms.Button();
-            this.loadingPanel = new System.Windows.Forms.Panel();
-            this.estimatedTimeLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataPlot = new ScottPlot.FormsPlot();
-            this.plotComboBox = new System.Windows.Forms.ComboBox();
-            this.viewControl = new System.Windows.Forms.TabControl();
-            this.timePage = new System.Windows.Forms.TabPage();
-            this.frequencyPage = new System.Windows.Forms.TabPage();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.savePlotBtn2 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.frameUpDown = new System.Windows.Forms.NumericUpDown();
-            this.frameLabel = new System.Windows.Forms.Label();
-            this.frameSlider = new System.Windows.Forms.TrackBar();
-            this.fileLabel2 = new System.Windows.Forms.Label();
-            this.fileButton2 = new System.Windows.Forms.Button();
-            this.analysisButton2 = new System.Windows.Forms.Button();
-            this.dataPlot2 = new ScottPlot.FormsPlot();
-            this.plotComboBox2 = new System.Windows.Forms.ComboBox();
-            this.loadingPanel2 = new System.Windows.Forms.Panel();
-            this.loadingPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.playPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.plotSecondsBox)).BeginInit();
-            this.loadingPanel.SuspendLayout();
-            this.viewControl.SuspendLayout();
-            this.timePage.SuspendLayout();
-            this.frequencyPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frameUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // loadingPanel2
-            // 
-            this.loadingPanel2.Controls.Add(this.estimatedTimeLabel2);
-            this.loadingPanel2.Controls.Add(this.label12);
-            this.loadingPanel2.Location = new System.Drawing.Point(122, 276);
-            this.loadingPanel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.loadingPanel2.Name = "loadingPanel2";
-            this.loadingPanel2.Size = new System.Drawing.Size(297, 133);
-            this.loadingPanel2.TabIndex = 3;
-            this.loadingPanel2.Visible = false;
-            // 
-            // estimatedTimeLabel2
-            // 
-            this.estimatedTimeLabel2.AutoSize = true;
-            this.estimatedTimeLabel2.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.estimatedTimeLabel2.Location = new System.Drawing.Point(69, 75);
-            this.estimatedTimeLabel2.Name = "estimatedTimeLabel2";
-            this.estimatedTimeLabel2.Size = new System.Drawing.Size(159, 20);
-            this.estimatedTimeLabel2.TabIndex = 1;
-            this.estimatedTimeLabel2.Text = "Estimated time: 0m00s";
-            this.estimatedTimeLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label12.Location = new System.Drawing.Point(91, 39);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(122, 20);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Processing data...";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            fileButton = new Button();
+            fileLabel = new Label();
+            splitContainer1 = new SplitContainer();
+            savePlotBtn = new Button();
+            playPanel = new Panel();
+            label1 = new Label();
+            currentLabel = new Label();
+            durationLabel = new Label();
+            stopButton = new Button();
+            playButton = new Button();
+            silenceCheckBox = new CheckBox();
+            label4 = new Label();
+            plotSecondsBox = new NumericUpDown();
+            label3 = new Label();
+            analysisButton = new Button();
+            loadingPanel = new Panel();
+            estimatedTimeLabel = new Label();
+            label2 = new Label();
+            dataPlot = new ScottPlot.FormsPlot();
+            plotComboBox = new ComboBox();
+            viewControl = new TabControl();
+            timePage = new TabPage();
+            frequencyPage = new TabPage();
+            splitContainer2 = new SplitContainer();
+            label5 = new Label();
+            lengthUpDown = new NumericUpDown();
+            savePlotBtn2 = new Button();
+            panel1 = new Panel();
+            frameUpDown = new NumericUpDown();
+            frameLabel = new Label();
+            frameSlider = new TrackBar();
+            fileLabel2 = new Label();
+            fileButton2 = new Button();
+            loadingPanel2 = new Panel();
+            estimatedTimeLabel2 = new Label();
+            label6 = new Label();
+            analysisButton2 = new Button();
+            dataPlot2 = new ScottPlot.FormsPlot();
+            plotComboBox2 = new ComboBox();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            playPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)plotSecondsBox).BeginInit();
+            loadingPanel.SuspendLayout();
+            viewControl.SuspendLayout();
+            timePage.SuspendLayout();
+            frequencyPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)lengthUpDown).BeginInit();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)frameUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)frameSlider).BeginInit();
+            loadingPanel2.SuspendLayout();
+            SuspendLayout();
             // 
             // fileButton
             // 
-            this.fileButton.BackColor = System.Drawing.Color.Goldenrod;
-            this.fileButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fileButton.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.fileButton.Location = new System.Drawing.Point(99, 37);
-            this.fileButton.Name = "fileButton";
-            this.fileButton.Size = new System.Drawing.Size(207, 51);
-            this.fileButton.TabIndex = 0;
-            this.fileButton.Text = "Select file";
-            this.fileButton.UseVisualStyleBackColor = false;
-            this.fileButton.Click += new System.EventHandler(this.fileButton_Click);
+            fileButton.BackColor = Color.Goldenrod;
+            fileButton.FlatStyle = FlatStyle.Flat;
+            fileButton.ForeColor = SystemColors.HighlightText;
+            fileButton.Location = new Point(87, 28);
+            fileButton.Margin = new Padding(3, 2, 3, 2);
+            fileButton.Name = "fileButton";
+            fileButton.Size = new Size(181, 38);
+            fileButton.TabIndex = 0;
+            fileButton.Text = "Select file";
+            fileButton.UseVisualStyleBackColor = false;
+            fileButton.Click += fileButton_Click;
             // 
             // fileLabel
             // 
-            this.fileLabel.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.fileLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.fileLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.fileLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fileLabel.Location = new System.Drawing.Point(99, 29);
-            this.fileLabel.Name = "fileLabel";
-            this.fileLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.fileLabel.Size = new System.Drawing.Size(207, 37);
-            this.fileLabel.TabIndex = 1;
-            this.fileLabel.Text = "File name";
+            fileLabel.BackColor = SystemColors.HighlightText;
+            fileLabel.BorderStyle = BorderStyle.FixedSingle;
+            fileLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            fileLabel.ForeColor = SystemColors.ControlText;
+            fileLabel.Location = new Point(87, 22);
+            fileLabel.Name = "fileLabel";
+            fileLabel.Padding = new Padding(4);
+            fileLabel.Size = new Size(181, 28);
+            fileLabel.TabIndex = 1;
+            fileLabel.Text = "File name";
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(27, 18);
-            this.splitContainer1.Name = "splitContainer1";
+            splitContainer1.Location = new Point(24, 14);
+            splitContainer1.Margin = new Padding(3, 2, 3, 2);
+            splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.savePlotBtn);
-            this.splitContainer1.Panel1.Controls.Add(this.playPanel);
-            this.splitContainer1.Panel1.Controls.Add(this.fileButton);
+            splitContainer1.Panel1.Controls.Add(savePlotBtn);
+            splitContainer1.Panel1.Controls.Add(playPanel);
+            splitContainer1.Panel1.Controls.Add(fileButton);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.silenceCheckBox);
-            this.splitContainer1.Panel2.Controls.Add(this.label4);
-            this.splitContainer1.Panel2.Controls.Add(this.plotSecondsBox);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.analysisButton);
-            this.splitContainer1.Panel2.Controls.Add(this.loadingPanel);
-            this.splitContainer1.Panel2.Controls.Add(this.dataPlot);
-            this.splitContainer1.Panel2.Controls.Add(this.plotComboBox);
-            this.splitContainer1.Size = new System.Drawing.Size(1327, 661);
-            this.splitContainer1.SplitterDistance = 443;
-            this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 2;
+            splitContainer1.Panel2.Controls.Add(silenceCheckBox);
+            splitContainer1.Panel2.Controls.Add(label4);
+            splitContainer1.Panel2.Controls.Add(plotSecondsBox);
+            splitContainer1.Panel2.Controls.Add(label3);
+            splitContainer1.Panel2.Controls.Add(analysisButton);
+            splitContainer1.Panel2.Controls.Add(loadingPanel);
+            splitContainer1.Panel2.Controls.Add(dataPlot);
+            splitContainer1.Panel2.Controls.Add(plotComboBox);
+            splitContainer1.Size = new Size(1161, 496);
+            splitContainer1.SplitterDistance = 387;
+            splitContainer1.TabIndex = 2;
             // 
             // savePlotBtn
             // 
-            this.savePlotBtn.BackColor = System.Drawing.Color.Goldenrod;
-            this.savePlotBtn.Enabled = false;
-            this.savePlotBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.savePlotBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.savePlotBtn.Location = new System.Drawing.Point(144, 521);
-            this.savePlotBtn.Name = "savePlotBtn";
-            this.savePlotBtn.Size = new System.Drawing.Size(126, 51);
-            this.savePlotBtn.TabIndex = 3;
-            this.savePlotBtn.Text = "Save plot";
-            this.savePlotBtn.UseVisualStyleBackColor = false;
-            this.savePlotBtn.Click += new System.EventHandler(this.savePlotBtn_Click);
+            savePlotBtn.BackColor = Color.Goldenrod;
+            savePlotBtn.Enabled = false;
+            savePlotBtn.FlatStyle = FlatStyle.Flat;
+            savePlotBtn.ForeColor = SystemColors.HighlightText;
+            savePlotBtn.Location = new Point(126, 391);
+            savePlotBtn.Margin = new Padding(3, 2, 3, 2);
+            savePlotBtn.Name = "savePlotBtn";
+            savePlotBtn.Size = new Size(110, 38);
+            savePlotBtn.TabIndex = 3;
+            savePlotBtn.Text = "Save plot";
+            savePlotBtn.UseVisualStyleBackColor = false;
+            savePlotBtn.Click += savePlotBtn_Click;
             // 
             // playPanel
             // 
-            this.playPanel.Controls.Add(this.label1);
-            this.playPanel.Controls.Add(this.currentLabel);
-            this.playPanel.Controls.Add(this.durationLabel);
-            this.playPanel.Controls.Add(this.fileLabel);
-            this.playPanel.Controls.Add(this.stopButton);
-            this.playPanel.Controls.Add(this.playButton);
-            this.playPanel.Location = new System.Drawing.Point(3, 128);
-            this.playPanel.Name = "playPanel";
-            this.playPanel.Size = new System.Drawing.Size(442, 333);
-            this.playPanel.TabIndex = 0;
+            playPanel.Controls.Add(label1);
+            playPanel.Controls.Add(currentLabel);
+            playPanel.Controls.Add(durationLabel);
+            playPanel.Controls.Add(fileLabel);
+            playPanel.Controls.Add(stopButton);
+            playPanel.Controls.Add(playButton);
+            playPanel.Location = new Point(3, 96);
+            playPanel.Margin = new Padding(3, 2, 3, 2);
+            playPanel.Name = "playPanel";
+            playPanel.Size = new Size(387, 250);
+            playPanel.TabIndex = 0;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label1.Location = new System.Drawing.Point(192, 187);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(19, 25);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "/";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.HighlightText;
+            label1.Location = new Point(168, 140);
+            label1.Name = "label1";
+            label1.Size = new Size(15, 20);
+            label1.TabIndex = 6;
+            label1.Text = "/";
             // 
             // currentLabel
             // 
-            this.currentLabel.AutoSize = true;
-            this.currentLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.currentLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.currentLabel.Location = new System.Drawing.Point(121, 187);
-            this.currentLabel.Name = "currentLabel";
-            this.currentLabel.Size = new System.Drawing.Size(46, 25);
-            this.currentLabel.TabIndex = 5;
-            this.currentLabel.Text = "0:00";
+            currentLabel.AutoSize = true;
+            currentLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            currentLabel.ForeColor = SystemColors.HighlightText;
+            currentLabel.Location = new Point(106, 140);
+            currentLabel.Name = "currentLabel";
+            currentLabel.Size = new Size(36, 20);
+            currentLabel.TabIndex = 5;
+            currentLabel.Text = "0:00";
             // 
             // durationLabel
             // 
-            this.durationLabel.AutoSize = true;
-            this.durationLabel.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.durationLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.durationLabel.Location = new System.Drawing.Point(235, 187);
-            this.durationLabel.Name = "durationLabel";
-            this.durationLabel.Size = new System.Drawing.Size(46, 25);
-            this.durationLabel.TabIndex = 4;
-            this.durationLabel.Text = "0:00";
+            durationLabel.AutoSize = true;
+            durationLabel.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            durationLabel.ForeColor = SystemColors.HighlightText;
+            durationLabel.Location = new Point(206, 140);
+            durationLabel.Name = "durationLabel";
+            durationLabel.Size = new Size(36, 20);
+            durationLabel.TabIndex = 4;
+            durationLabel.Text = "0:00";
             // 
             // stopButton
             // 
-            this.stopButton.BackColor = System.Drawing.Color.Goldenrod;
-            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stopButton.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.stopButton.Location = new System.Drawing.Point(213, 107);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(94, 51);
-            this.stopButton.TabIndex = 3;
-            this.stopButton.Text = "Stop";
-            this.stopButton.UseVisualStyleBackColor = false;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            stopButton.BackColor = Color.Goldenrod;
+            stopButton.FlatStyle = FlatStyle.Flat;
+            stopButton.ForeColor = SystemColors.HighlightText;
+            stopButton.Location = new Point(186, 80);
+            stopButton.Margin = new Padding(3, 2, 3, 2);
+            stopButton.Name = "stopButton";
+            stopButton.Size = new Size(82, 38);
+            stopButton.TabIndex = 3;
+            stopButton.Text = "Stop";
+            stopButton.UseVisualStyleBackColor = false;
+            stopButton.Click += stopButton_Click;
             // 
             // playButton
             // 
-            this.playButton.BackColor = System.Drawing.Color.Goldenrod;
-            this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.playButton.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.playButton.Location = new System.Drawing.Point(96, 107);
-            this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(94, 51);
-            this.playButton.TabIndex = 2;
-            this.playButton.Text = "Play";
-            this.playButton.UseVisualStyleBackColor = false;
-            this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            playButton.BackColor = Color.Goldenrod;
+            playButton.FlatStyle = FlatStyle.Flat;
+            playButton.ForeColor = SystemColors.HighlightText;
+            playButton.Location = new Point(84, 80);
+            playButton.Margin = new Padding(3, 2, 3, 2);
+            playButton.Name = "playButton";
+            playButton.Size = new Size(82, 38);
+            playButton.TabIndex = 2;
+            playButton.Text = "Play";
+            playButton.UseVisualStyleBackColor = false;
+            playButton.Click += playButton_Click;
             // 
             // silenceCheckBox
             // 
-            this.silenceCheckBox.AutoSize = true;
-            this.silenceCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.silenceCheckBox.Location = new System.Drawing.Point(597, 51);
-            this.silenceCheckBox.Name = "silenceCheckBox";
-            this.silenceCheckBox.Size = new System.Drawing.Size(18, 17);
-            this.silenceCheckBox.TabIndex = 10;
-            this.silenceCheckBox.UseVisualStyleBackColor = true;
-            this.silenceCheckBox.CheckedChanged += new System.EventHandler(this.silenceCheckBox_CheckedChanged);
+            silenceCheckBox.AutoSize = true;
+            silenceCheckBox.ForeColor = Color.Black;
+            silenceCheckBox.Location = new Point(522, 38);
+            silenceCheckBox.Margin = new Padding(3, 2, 3, 2);
+            silenceCheckBox.Name = "silenceCheckBox";
+            silenceCheckBox.Size = new Size(15, 14);
+            silenceCheckBox.TabIndex = 10;
+            silenceCheckBox.UseVisualStyleBackColor = true;
+            silenceCheckBox.CheckedChanged += silenceCheckBox_CheckedChanged;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label4.Location = new System.Drawing.Point(506, 48);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 25);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Silence:";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = SystemColors.HighlightText;
+            label4.Location = new Point(443, 36);
+            label4.Name = "label4";
+            label4.Size = new Size(59, 20);
+            label4.TabIndex = 9;
+            label4.Text = "Silence:";
             // 
             // plotSecondsBox
             // 
-            this.plotSecondsBox.Location = new System.Drawing.Point(597, 13);
-            this.plotSecondsBox.Maximum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.plotSecondsBox.Minimum = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.plotSecondsBox.Name = "plotSecondsBox";
-            this.plotSecondsBox.Size = new System.Drawing.Size(56, 27);
-            this.plotSecondsBox.TabIndex = 8;
-            this.plotSecondsBox.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.plotSecondsBox.ValueChanged += new System.EventHandler(this.plotSecondsBox_ValueChanged);
+            plotSecondsBox.Location = new Point(522, 10);
+            plotSecondsBox.Margin = new Padding(3, 2, 3, 2);
+            plotSecondsBox.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            plotSecondsBox.Minimum = new decimal(new int[] { 3, 0, 0, 0 });
+            plotSecondsBox.Name = "plotSecondsBox";
+            plotSecondsBox.Size = new Size(49, 23);
+            plotSecondsBox.TabIndex = 8;
+            plotSecondsBox.Value = new decimal(new int[] { 4, 0, 0, 0 });
+            plotSecondsBox.ValueChanged += plotSecondsBox_ValueChanged;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label3.Location = new System.Drawing.Point(493, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 25);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Seconds:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = SystemColors.HighlightText;
+            label3.Location = new Point(431, 8);
+            label3.Name = "label3";
+            label3.Size = new Size(67, 20);
+            label3.TabIndex = 7;
+            label3.Text = "Seconds:";
             // 
             // analysisButton
             // 
-            this.analysisButton.BackColor = System.Drawing.Color.Goldenrod;
-            this.analysisButton.Enabled = false;
-            this.analysisButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.analysisButton.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.analysisButton.Location = new System.Drawing.Point(709, 17);
-            this.analysisButton.Name = "analysisButton";
-            this.analysisButton.Size = new System.Drawing.Size(106, 41);
-            this.analysisButton.TabIndex = 7;
-            this.analysisButton.Text = "Analyze";
-            this.analysisButton.UseVisualStyleBackColor = false;
-            this.analysisButton.Click += new System.EventHandler(this.analysisButton_Click);
+            analysisButton.BackColor = Color.Goldenrod;
+            analysisButton.Enabled = false;
+            analysisButton.FlatStyle = FlatStyle.Flat;
+            analysisButton.ForeColor = SystemColors.HighlightText;
+            analysisButton.Location = new Point(620, 13);
+            analysisButton.Margin = new Padding(3, 2, 3, 2);
+            analysisButton.Name = "analysisButton";
+            analysisButton.Size = new Size(93, 31);
+            analysisButton.TabIndex = 7;
+            analysisButton.Text = "Analyze";
+            analysisButton.UseVisualStyleBackColor = false;
+            analysisButton.Click += analysisButton_Click;
             // 
             // loadingPanel
             // 
-            this.loadingPanel.Controls.Add(this.estimatedTimeLabel);
-            this.loadingPanel.Controls.Add(this.label2);
-            this.loadingPanel.Location = new System.Drawing.Point(122, 276);
-            this.loadingPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.loadingPanel.Name = "loadingPanel";
-            this.loadingPanel.Size = new System.Drawing.Size(297, 133);
-            this.loadingPanel.TabIndex = 3;
-            this.loadingPanel.Visible = false;
+            loadingPanel.Controls.Add(estimatedTimeLabel);
+            loadingPanel.Controls.Add(label2);
+            loadingPanel.Location = new Point(107, 207);
+            loadingPanel.Name = "loadingPanel";
+            loadingPanel.Size = new Size(260, 100);
+            loadingPanel.TabIndex = 3;
+            loadingPanel.Visible = false;
             // 
             // estimatedTimeLabel
             // 
-            this.estimatedTimeLabel.AutoSize = true;
-            this.estimatedTimeLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.estimatedTimeLabel.Location = new System.Drawing.Point(69, 75);
-            this.estimatedTimeLabel.Name = "estimatedTimeLabel";
-            this.estimatedTimeLabel.Size = new System.Drawing.Size(159, 20);
-            this.estimatedTimeLabel.TabIndex = 1;
-            this.estimatedTimeLabel.Text = "Estimated time: 0m00s";
-            this.estimatedTimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            estimatedTimeLabel.AutoSize = true;
+            estimatedTimeLabel.ForeColor = SystemColors.HighlightText;
+            estimatedTimeLabel.Location = new Point(60, 56);
+            estimatedTimeLabel.Name = "estimatedTimeLabel";
+            estimatedTimeLabel.Size = new Size(126, 15);
+            estimatedTimeLabel.TabIndex = 1;
+            estimatedTimeLabel.Text = "Estimated time: 0m00s";
+            estimatedTimeLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label2.Location = new System.Drawing.Point(91, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Processing data...";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            label2.AutoSize = true;
+            label2.ForeColor = SystemColors.HighlightText;
+            label2.Location = new Point(80, 29);
+            label2.Name = "label2";
+            label2.Size = new Size(99, 15);
+            label2.TabIndex = 0;
+            label2.Text = "Processing data...";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // dataPlot
             // 
-            this.dataPlot.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.dataPlot.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dataPlot.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.dataPlot.Location = new System.Drawing.Point(31, 83);
-            this.dataPlot.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.dataPlot.Name = "dataPlot";
-            this.dataPlot.Size = new System.Drawing.Size(825, 576);
-            this.dataPlot.TabIndex = 2;
-            this.dataPlot.Visible = false;
+            dataPlot.BackColor = SystemColors.HighlightText;
+            dataPlot.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataPlot.ForeColor = SystemColors.AppWorkspace;
+            dataPlot.Location = new Point(27, 62);
+            dataPlot.Margin = new Padding(4, 3, 4, 3);
+            dataPlot.Name = "dataPlot";
+            dataPlot.Size = new Size(722, 432);
+            dataPlot.TabIndex = 2;
+            dataPlot.Visible = false;
             // 
             // plotComboBox
             // 
-            this.plotComboBox.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.plotComboBox.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.plotComboBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.plotComboBox.FormattingEnabled = true;
-            this.plotComboBox.Location = new System.Drawing.Point(31, 25);
-            this.plotComboBox.Name = "plotComboBox";
-            this.plotComboBox.Size = new System.Drawing.Size(418, 33);
-            this.plotComboBox.TabIndex = 1;
-            this.plotComboBox.SelectedIndexChanged += new System.EventHandler(this.plotComboBox_SelectedIndexChanged);
+            plotComboBox.BackColor = SystemColors.HighlightText;
+            plotComboBox.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            plotComboBox.ForeColor = SystemColors.ControlText;
+            plotComboBox.FormattingEnabled = true;
+            plotComboBox.Location = new Point(27, 19);
+            plotComboBox.Margin = new Padding(3, 2, 3, 2);
+            plotComboBox.Name = "plotComboBox";
+            plotComboBox.Size = new Size(366, 27);
+            plotComboBox.TabIndex = 1;
+            plotComboBox.SelectedIndexChanged += plotComboBox_SelectedIndexChanged;
             // 
             // viewControl
             // 
-            this.viewControl.Controls.Add(this.timePage);
-            this.viewControl.Controls.Add(this.frequencyPage);
-            this.viewControl.Location = new System.Drawing.Point(72, 23);
-            this.viewControl.Name = "viewControl";
-            this.viewControl.SelectedIndex = 0;
-            this.viewControl.Size = new System.Drawing.Size(1406, 730);
-            this.viewControl.TabIndex = 3;
-            this.viewControl.SelectedIndexChanged += new System.EventHandler(this.viewControl_SelectedIndexChanged);
+            viewControl.Controls.Add(timePage);
+            viewControl.Controls.Add(frequencyPage);
+            viewControl.Location = new Point(63, 17);
+            viewControl.Margin = new Padding(3, 2, 3, 2);
+            viewControl.Name = "viewControl";
+            viewControl.SelectedIndex = 0;
+            viewControl.Size = new Size(1230, 548);
+            viewControl.TabIndex = 3;
+            viewControl.SelectedIndexChanged += viewControl_SelectedIndexChanged;
             // 
             // timePage
             // 
-            this.timePage.BackColor = System.Drawing.Color.Black;
-            this.timePage.Controls.Add(this.splitContainer1);
-            this.timePage.Location = new System.Drawing.Point(4, 29);
-            this.timePage.Name = "timePage";
-            this.timePage.Padding = new System.Windows.Forms.Padding(3);
-            this.timePage.Size = new System.Drawing.Size(1398, 697);
-            this.timePage.TabIndex = 0;
-            this.timePage.Text = "Time";
+            timePage.BackColor = Color.Black;
+            timePage.Controls.Add(splitContainer1);
+            timePage.Location = new Point(4, 24);
+            timePage.Margin = new Padding(3, 2, 3, 2);
+            timePage.Name = "timePage";
+            timePage.Padding = new Padding(3, 2, 3, 2);
+            timePage.Size = new Size(1222, 520);
+            timePage.TabIndex = 0;
+            timePage.Text = "Time";
             // 
             // frequencyPage
             // 
-            this.frequencyPage.BackColor = System.Drawing.Color.Black;
-            this.frequencyPage.Controls.Add(this.splitContainer2);
-            this.frequencyPage.Location = new System.Drawing.Point(4, 29);
-            this.frequencyPage.Name = "frequencyPage";
-            this.frequencyPage.Padding = new System.Windows.Forms.Padding(3);
-            this.frequencyPage.Size = new System.Drawing.Size(1398, 697);
-            this.frequencyPage.TabIndex = 1;
-            this.frequencyPage.Text = "Frequency";
+            frequencyPage.BackColor = Color.Black;
+            frequencyPage.Controls.Add(splitContainer2);
+            frequencyPage.Location = new Point(4, 24);
+            frequencyPage.Margin = new Padding(3, 2, 3, 2);
+            frequencyPage.Name = "frequencyPage";
+            frequencyPage.Padding = new Padding(3, 2, 3, 2);
+            frequencyPage.Size = new Size(1222, 520);
+            frequencyPage.TabIndex = 1;
+            frequencyPage.Text = "Frame";
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Location = new System.Drawing.Point(36, 18);
-            this.splitContainer2.Name = "splitContainer2";
+            splitContainer2.Location = new Point(32, 14);
+            splitContainer2.Margin = new Padding(3, 2, 3, 2);
+            splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.savePlotBtn2);
-            this.splitContainer2.Panel1.Controls.Add(this.panel1);
-            this.splitContainer2.Panel1.Controls.Add(this.fileButton2);
+            splitContainer2.Panel1.Controls.Add(label5);
+            splitContainer2.Panel1.Controls.Add(lengthUpDown);
+            splitContainer2.Panel1.Controls.Add(savePlotBtn2);
+            splitContainer2.Panel1.Controls.Add(panel1);
+            splitContainer2.Panel1.Controls.Add(fileButton2);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.analysisButton2);
-            this.splitContainer2.Panel2.Controls.Add(this.loadingPanel2);
-            this.splitContainer2.Panel2.Controls.Add(this.dataPlot2);
-            this.splitContainer2.Panel2.Controls.Add(this.plotComboBox2);
-            this.splitContainer2.Size = new System.Drawing.Size(1327, 661);
-            this.splitContainer2.SplitterDistance = 443;
-            this.splitContainer2.SplitterWidth = 5;
-            this.splitContainer2.TabIndex = 3;
+            splitContainer2.Panel2.Controls.Add(loadingPanel2);
+            splitContainer2.Panel2.Controls.Add(analysisButton2);
+            splitContainer2.Panel2.Controls.Add(dataPlot2);
+            splitContainer2.Panel2.Controls.Add(plotComboBox2);
+            splitContainer2.Size = new Size(1161, 496);
+            splitContainer2.SplitterDistance = 387;
+            splitContainer2.TabIndex = 3;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = SystemColors.Control;
+            label5.Location = new Point(25, 23);
+            label5.Name = "label5";
+            label5.Size = new Size(140, 21);
+            label5.TabIndex = 6;
+            label5.Text = "Frame length (ms):";
+            // 
+            // lengthUpDown
+            // 
+            lengthUpDown.Location = new Point(171, 23);
+            lengthUpDown.Margin = new Padding(3, 2, 3, 2);
+            lengthUpDown.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
+            lengthUpDown.Name = "lengthUpDown";
+            lengthUpDown.Size = new Size(131, 23);
+            lengthUpDown.TabIndex = 5;
+            lengthUpDown.Value = new decimal(new int[] { 40, 0, 0, 0 });
             // 
             // savePlotBtn2
             // 
-            this.savePlotBtn2.BackColor = System.Drawing.Color.Goldenrod;
-            this.savePlotBtn2.Enabled = false;
-            this.savePlotBtn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.savePlotBtn2.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.savePlotBtn2.Location = new System.Drawing.Point(144, 521);
-            this.savePlotBtn2.Name = "savePlotBtn2";
-            this.savePlotBtn2.Size = new System.Drawing.Size(126, 51);
-            this.savePlotBtn2.TabIndex = 3;
-            this.savePlotBtn2.Text = "Save plot";
-            this.savePlotBtn2.UseVisualStyleBackColor = false;
-            this.savePlotBtn2.Click += new System.EventHandler(this.savePlotBtn2_Click);
+            savePlotBtn2.BackColor = Color.Goldenrod;
+            savePlotBtn2.Enabled = false;
+            savePlotBtn2.FlatStyle = FlatStyle.Flat;
+            savePlotBtn2.ForeColor = SystemColors.HighlightText;
+            savePlotBtn2.Location = new Point(126, 391);
+            savePlotBtn2.Margin = new Padding(3, 2, 3, 2);
+            savePlotBtn2.Name = "savePlotBtn2";
+            savePlotBtn2.Size = new Size(110, 38);
+            savePlotBtn2.TabIndex = 3;
+            savePlotBtn2.Text = "Save plot";
+            savePlotBtn2.UseVisualStyleBackColor = false;
+            savePlotBtn2.Click += savePlotBtn2_Click;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.frameUpDown);
-            this.panel1.Controls.Add(this.frameLabel);
-            this.panel1.Controls.Add(this.frameSlider);
-            this.panel1.Controls.Add(this.fileLabel2);
-            this.panel1.Location = new System.Drawing.Point(3, 128);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(442, 333);
-            this.panel1.TabIndex = 0;
+            panel1.Controls.Add(frameUpDown);
+            panel1.Controls.Add(frameLabel);
+            panel1.Controls.Add(frameSlider);
+            panel1.Controls.Add(fileLabel2);
+            panel1.Location = new Point(3, 157);
+            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(387, 189);
+            panel1.TabIndex = 0;
             // 
             // frameUpDown
             // 
-            this.frameUpDown.Enabled = false;
-            this.frameUpDown.Location = new System.Drawing.Point(187, 153);
-            this.frameUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.frameUpDown.Name = "frameUpDown";
-            this.frameUpDown.Size = new System.Drawing.Size(150, 27);
-            this.frameUpDown.TabIndex = 4;
-            this.frameUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.frameUpDown.ValueChanged += new System.EventHandler(this.frameUpDown_ValueChanged);
+            frameUpDown.Enabled = false;
+            frameUpDown.Location = new Point(168, 79);
+            frameUpDown.Margin = new Padding(3, 2, 3, 2);
+            frameUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            frameUpDown.Name = "frameUpDown";
+            frameUpDown.Size = new Size(131, 23);
+            frameUpDown.TabIndex = 4;
+            frameUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            frameUpDown.ValueChanged += frameUpDown_ValueChanged;
             // 
             // frameLabel
             // 
-            this.frameLabel.AutoSize = true;
-            this.frameLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.frameLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.frameLabel.Location = new System.Drawing.Point(99, 148);
-            this.frameLabel.Name = "frameLabel";
-            this.frameLabel.Size = new System.Drawing.Size(70, 28);
-            this.frameLabel.TabIndex = 3;
-            this.frameLabel.Text = "Frame:";
+            frameLabel.AutoSize = true;
+            frameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            frameLabel.ForeColor = SystemColors.Control;
+            frameLabel.Location = new Point(98, 79);
+            frameLabel.Name = "frameLabel";
+            frameLabel.Size = new Size(57, 21);
+            frameLabel.TabIndex = 3;
+            frameLabel.Text = "Frame:";
             // 
             // frameSlider
             // 
-            this.frameSlider.Enabled = false;
-            this.frameSlider.Location = new System.Drawing.Point(43, 212);
-            this.frameSlider.Maximum = 100;
-            this.frameSlider.Minimum = 1;
-            this.frameSlider.Name = "frameSlider";
-            this.frameSlider.Size = new System.Drawing.Size(356, 56);
-            this.frameSlider.TabIndex = 2;
-            this.frameSlider.Value = 1;
-            this.frameSlider.Scroll += new System.EventHandler(this.frameSlider_Scroll);
+            frameSlider.Enabled = false;
+            frameSlider.Location = new Point(38, 118);
+            frameSlider.Margin = new Padding(3, 2, 3, 2);
+            frameSlider.Maximum = 100;
+            frameSlider.Minimum = 1;
+            frameSlider.Name = "frameSlider";
+            frameSlider.Size = new Size(312, 45);
+            frameSlider.TabIndex = 2;
+            frameSlider.Value = 1;
+            frameSlider.Scroll += frameSlider_Scroll;
             // 
             // fileLabel2
             // 
-            this.fileLabel2.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.fileLabel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.fileLabel2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.fileLabel2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fileLabel2.Location = new System.Drawing.Point(99, 29);
-            this.fileLabel2.Name = "fileLabel2";
-            this.fileLabel2.Padding = new System.Windows.Forms.Padding(5);
-            this.fileLabel2.Size = new System.Drawing.Size(207, 37);
-            this.fileLabel2.TabIndex = 1;
-            this.fileLabel2.Text = "File name";
+            fileLabel2.BackColor = SystemColors.HighlightText;
+            fileLabel2.BorderStyle = BorderStyle.FixedSingle;
+            fileLabel2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            fileLabel2.ForeColor = SystemColors.ControlText;
+            fileLabel2.Location = new Point(98, 28);
+            fileLabel2.Name = "fileLabel2";
+            fileLabel2.Padding = new Padding(4);
+            fileLabel2.Size = new Size(181, 28);
+            fileLabel2.TabIndex = 1;
+            fileLabel2.Text = "File name";
             // 
             // fileButton2
             // 
-            this.fileButton2.BackColor = System.Drawing.Color.Goldenrod;
-            this.fileButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fileButton2.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.fileButton2.Location = new System.Drawing.Point(99, 37);
-            this.fileButton2.Name = "fileButton2";
-            this.fileButton2.Size = new System.Drawing.Size(207, 51);
-            this.fileButton2.TabIndex = 0;
-            this.fileButton2.Text = "Select file";
-            this.fileButton2.UseVisualStyleBackColor = false;
-            this.fileButton2.Click += new System.EventHandler(this.fileButton2_Click);
+            fileButton2.BackColor = Color.Goldenrod;
+            fileButton2.FlatStyle = FlatStyle.Flat;
+            fileButton2.ForeColor = SystemColors.HighlightText;
+            fileButton2.Location = new Point(101, 80);
+            fileButton2.Margin = new Padding(3, 2, 3, 2);
+            fileButton2.Name = "fileButton2";
+            fileButton2.Size = new Size(181, 38);
+            fileButton2.TabIndex = 0;
+            fileButton2.Text = "Select file";
+            fileButton2.UseVisualStyleBackColor = false;
+            fileButton2.Click += fileButton2_Click;
+            // 
+            // loadingPanel2
+            // 
+            loadingPanel2.Controls.Add(estimatedTimeLabel2);
+            loadingPanel2.Controls.Add(label6);
+            loadingPanel2.Location = new Point(112, 207);
+            loadingPanel2.Name = "loadingPanel2";
+            loadingPanel2.Size = new Size(260, 100);
+            loadingPanel2.TabIndex = 8;
+            loadingPanel2.Visible = false;
+            // 
+            // estimatedTimeLabel2
+            // 
+            estimatedTimeLabel2.AutoSize = true;
+            estimatedTimeLabel2.ForeColor = SystemColors.HighlightText;
+            estimatedTimeLabel2.Location = new Point(60, 56);
+            estimatedTimeLabel2.Name = "estimatedTimeLabel2";
+            estimatedTimeLabel2.Size = new Size(126, 15);
+            estimatedTimeLabel2.TabIndex = 1;
+            estimatedTimeLabel2.Text = "Estimated time: 0m00s";
+            estimatedTimeLabel2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.ForeColor = SystemColors.HighlightText;
+            label6.Location = new Point(80, 29);
+            label6.Name = "label6";
+            label6.Size = new Size(99, 15);
+            label6.TabIndex = 0;
+            label6.Text = "Processing data...";
+            label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // analysisButton2
             // 
-            this.analysisButton2.BackColor = System.Drawing.Color.Goldenrod;
-            this.analysisButton2.Enabled = false;
-            this.analysisButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.analysisButton2.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.analysisButton2.Location = new System.Drawing.Point(709, 17);
-            this.analysisButton2.Name = "analysisButton2";
-            this.analysisButton2.Size = new System.Drawing.Size(106, 41);
-            this.analysisButton2.TabIndex = 7;
-            this.analysisButton2.Text = "Analyze";
-            this.analysisButton2.UseVisualStyleBackColor = false;
-            this.analysisButton2.Click += new System.EventHandler(this.analysisButton2_Click);
+            analysisButton2.BackColor = Color.Goldenrod;
+            analysisButton2.Enabled = false;
+            analysisButton2.FlatStyle = FlatStyle.Flat;
+            analysisButton2.ForeColor = SystemColors.HighlightText;
+            analysisButton2.Location = new Point(620, 13);
+            analysisButton2.Margin = new Padding(3, 2, 3, 2);
+            analysisButton2.Name = "analysisButton2";
+            analysisButton2.Size = new Size(93, 31);
+            analysisButton2.TabIndex = 7;
+            analysisButton2.Text = "Analyze";
+            analysisButton2.UseVisualStyleBackColor = false;
+            analysisButton2.Click += analysisButton2_Click;
             // 
             // dataPlot2
             // 
-            this.dataPlot2.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.dataPlot2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.dataPlot2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.dataPlot2.Location = new System.Drawing.Point(31, 83);
-            this.dataPlot2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.dataPlot2.Name = "dataPlot2";
-            this.dataPlot2.Size = new System.Drawing.Size(825, 576);
-            this.dataPlot2.TabIndex = 2;
-            this.dataPlot2.Visible = false;
+            dataPlot2.BackColor = SystemColors.HighlightText;
+            dataPlot2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataPlot2.ForeColor = SystemColors.AppWorkspace;
+            dataPlot2.Location = new Point(27, 62);
+            dataPlot2.Margin = new Padding(4, 3, 4, 3);
+            dataPlot2.Name = "dataPlot2";
+            dataPlot2.Size = new Size(722, 432);
+            dataPlot2.TabIndex = 2;
+            dataPlot2.Visible = false;
             // 
             // plotComboBox2
             // 
-            this.plotComboBox2.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.plotComboBox2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.plotComboBox2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.plotComboBox2.FormattingEnabled = true;
-            this.plotComboBox2.Location = new System.Drawing.Point(31, 25);
-            this.plotComboBox2.Name = "plotComboBox2";
-            this.plotComboBox2.Size = new System.Drawing.Size(418, 33);
-            this.plotComboBox2.TabIndex = 1;
-            this.plotComboBox2.SelectedIndexChanged += new System.EventHandler(this.plotComboBox2_SelectedIndexChanged);
+            plotComboBox2.BackColor = SystemColors.HighlightText;
+            plotComboBox2.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point);
+            plotComboBox2.ForeColor = SystemColors.ControlText;
+            plotComboBox2.FormattingEnabled = true;
+            plotComboBox2.Location = new Point(27, 19);
+            plotComboBox2.Margin = new Padding(3, 2, 3, 2);
+            plotComboBox2.Name = "plotComboBox2";
+            plotComboBox2.Size = new Size(366, 27);
+            plotComboBox2.TabIndex = 1;
+            plotComboBox2.SelectedIndexChanged += plotComboBox2_SelectedIndexChanged;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1523, 781);
-            this.Controls.Add(this.viewControl);
-            this.Name = "Form1";
-            this.Text = "AudioCracker";
-            this.loadingPanel2.ResumeLayout(false);
-            this.loadingPanel2.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.playPanel.ResumeLayout(false);
-            this.playPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.plotSecondsBox)).EndInit();
-            this.loadingPanel.ResumeLayout(false);
-            this.loadingPanel.PerformLayout();
-            this.viewControl.ResumeLayout(false);
-            this.timePage.ResumeLayout(false);
-            this.frequencyPage.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.frameUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Black;
+            ClientSize = new Size(1333, 586);
+            Controls.Add(viewControl);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "Form1";
+            Text = "AudioCracker";
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            playPanel.ResumeLayout(false);
+            playPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)plotSecondsBox).EndInit();
+            loadingPanel.ResumeLayout(false);
+            loadingPanel.PerformLayout();
+            viewControl.ResumeLayout(false);
+            timePage.ResumeLayout(false);
+            frequencyPage.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel1.PerformLayout();
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)lengthUpDown).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)frameUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)frameSlider).EndInit();
+            loadingPanel2.ResumeLayout(false);
+            loadingPanel2.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -636,13 +661,15 @@
         private Label fileLabel2;
         private Button fileButton2;
         private Button analysisButton2;
-        private Panel loadingPanel2;
-        private Label estimatedTimeLabel2;
-        private Label label12;
         private ScottPlot.FormsPlot dataPlot2;
         private ComboBox plotComboBox2;
         private NumericUpDown frameUpDown;
         private Label frameLabel;
         private TrackBar frameSlider;
+        private Panel loadingPanel2;
+        private Label estimatedTimeLabel2;
+        private Label label6;
+        private Label label5;
+        private NumericUpDown lengthUpDown;
     }
 }

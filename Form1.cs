@@ -1,5 +1,6 @@
 using audioCracker.Analysis;
 using audioCracker.Controls;
+using audioCracker.Decoder;
 using audioCracker.Loading;
 using audioCracker.Views;
 using System.Media;
@@ -23,14 +24,14 @@ namespace audioCracker
 
         private void setupViews()
         {
-             this.timeViewLogic = new TimeViewLogic();
-           
+            this.timeViewLogic = new TimeViewLogic();
+
 
             timeViewLogic.setupUIComponents(
                 this, playButton, stopButton, fileButton,
                 plotComboBox, loadingPanel, estimatedTimeLabel,
                 analysisButton, dataPlot, plotSecondsBox,
-                savePlotBtn, durationLabel, currentLabel, 
+                savePlotBtn, durationLabel, currentLabel,
                 fileLabel, silenceCheckBox);
 
             this.frequencyViewLogic = new FrequencyViewLogic();
@@ -39,10 +40,10 @@ namespace audioCracker
                 this, new Button(), new Button(), fileButton2,
                 plotComboBox2, loadingPanel2, estimatedTimeLabel2,
                 analysisButton2, dataPlot2, new NumericUpDown(),
-                savePlotBtn2, new Label(), new Label(), 
+                savePlotBtn2, new Label(), new Label(),
                 fileLabel2, new CheckBox());
 
-            frequencyViewLogic.setupFrequencyViewLogic(frameUpDown, frameSlider);
+            frequencyViewLogic.setupFrequencyViewLogic(frameUpDown, frameSlider, lengthUpDown);
 
             this.currentLogic = timeViewLogic;
         }
@@ -116,6 +117,8 @@ namespace audioCracker
                 {
                     this.currentLogic.fileLabel.Text = this.currentLogic.openFileDialog.SafeFileName;
                     this.currentLogic.filePath = this.currentLogic.openFileDialog.FileName;
+                    FrameMerger.frameLenInMs = (int)this.currentLogic.lengthUpDown.Value;
+                    this.currentLogic.plotManager.framesPerSecond = 1000 / FrameMerger.frameLenInMs; 
 
                     this.currentLogic.soundPlayer.Setup(this.currentLogic.openFileDialog.FileName);
 
@@ -192,7 +195,7 @@ namespace audioCracker
 
         private void viewControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch(this.viewControl.SelectedIndex)
+            switch (this.viewControl.SelectedIndex)
             {
                 case 0:
                     this.currentLogic = this.timeViewLogic;

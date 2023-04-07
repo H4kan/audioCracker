@@ -1,5 +1,6 @@
 ﻿using audioCracker.Analysis.Clip;
 using audioCracker.Analysis.Frame;
+using audioCracker.Analysis.Frequency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace audioCracker.Analysis
 {
     public class AnalysisManager
     {
-        protected List<(string, IFrameAnalyser, IClipAnalyser?, string)> clipFrameAnalysers;
+        protected List<(string, FrameAnalyser, IClipAnalyser?, string)> clipFrameAnalysers;
 
-        protected (string, IFrameAnalyser, IClipAnalyser?, string) currentAnalyser;
+        protected (string, FrameAnalyser, IClipAnalyser?, string) currentAnalyser;
 
         public AnalysisManager()
         {
-            this.clipFrameAnalysers = new List<(string, IFrameAnalyser, IClipAnalyser?, string)>()
+            this.clipFrameAnalysers = new List<(string, FrameAnalyser, IClipAnalyser?, string)>()
             {
                 new ("Signal", new ForwardAnalyser(), null, "Amplitudes"),
                 new ("Volume", new VolumeAnalyser(), null, "Volume"),
@@ -28,7 +29,9 @@ namespace audioCracker.Analysis
                 new ("Average clip volume", new VolumeAnalyser(), new AverageAnalyser(), "Volume"),
                 new ("LSTER", new STEAnalyser(), new CutDownAnalyser(50.0), "fraction of frames"),
                 new ("ZSTD", new ZCRAnalyser(), new StdAnalyser(), "ZSTD"),
-                new ("HZCRR",  new ZCRAnalyser(), new CutUpAnalyser(150.0), "HZCRR")
+                new ("HZCRR",  new ZCRAnalyser(), new CutUpAnalyser(150.0), "HZCRR"),
+                new ("FFT Volume", new FFTVolumeAnalyser(), null, "Volume"),
+                new ("FFT Centroid", new FFTCentroidAnalyser(), null, "FC")
             };
         }
 
@@ -42,7 +45,7 @@ namespace audioCracker.Analysis
             this.currentAnalyser = this.clipFrameAnalysers.First(a => a.Item1== analyserName);
         }
 
-        public (IFrameAnalyser, IClipAnalyser?) GetAnalyser()
+        public (FrameAnalyser, IClipAnalyser?) GetAnalyser()
         {
             return (this.currentAnalyser.Item2, this.currentAnalyser.Item3);
         }
@@ -52,5 +55,10 @@ namespace audioCracker.Analysis
             return this.currentAnalyser.Item4;
         }
 
-}
+        public string GetXLabel()
+        {
+            return this.currentAnalyser.Item2.FrequencyDomain ? "Frequency [Hz]" : "Time [s]";
+        }
+
+    }
 }

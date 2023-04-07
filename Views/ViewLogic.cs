@@ -32,6 +32,8 @@ namespace audioCracker.Views
 
         public FrameControlManager frameControlManager;
 
+        public NumericUpDown lengthUpDown = new NumericUpDown();
+
         public virtual void setupUIComponents(Form form, Button playButton,
             Button stopButton, Button fileButton,
             ComboBox plotComboBox, Panel loadingPanel,
@@ -84,6 +86,8 @@ namespace audioCracker.Views
             this.controlManager.InitializeControls();
 
             this.frameControlManager = new FrameControlManager(this.frameUpDown, this.frameSlider);
+
+            this.lengthUpDown.Value = 40;
 
     }
     }

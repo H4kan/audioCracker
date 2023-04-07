@@ -17,7 +17,7 @@ namespace audioCracker.Decoder
 
         public LoaderManager loaderManager;
 
-        public IFrameAnalyser currentAnalyser;
+        public FrameAnalyser currentAnalyser;
 
         public FrameMerger frameMerger;
 
@@ -26,6 +26,7 @@ namespace audioCracker.Decoder
         public double[] processedFrames;
 
         public double[] processedFrame;
+        public double[]? processedDomain;
 
         private int estimatedTimeInSeconds;
 
@@ -49,7 +50,7 @@ namespace audioCracker.Decoder
             return this.frames.Count();
         }
 
-        public void SetAnalyser(IFrameAnalyser analyser)
+        public void SetAnalyser(FrameAnalyser analyser)
         {
             this.currentAnalyser = analyser;
         }
@@ -93,6 +94,7 @@ namespace audioCracker.Decoder
         public void SetupFrame()
         {
             this.processedFrame = new double[this.frames.ElementAt(0).Count()];
+
         }
 
         public IEnumerable<double> GetProcessedFrames(int startFrame, int endFrame)
@@ -103,6 +105,11 @@ namespace audioCracker.Decoder
         public IEnumerable<double> GetProcessedFrame()
         {
             return this.processedFrame;
+        }
+
+        public IEnumerable<double>? GetProcessedDomain()
+        {
+            return this.processedDomain;
         }
 
         public (double, double) GetRange()
@@ -124,7 +131,7 @@ namespace audioCracker.Decoder
         {
             Stopwatch stopwatch = new Stopwatch();
 
-            var frameEst = 500;
+            var frameEst = this.currentAnalyser.FrequencyDomain ? 10 : 500;
             var factor = 18;
 
             if (this.frames.Count() > 4 * frameEst)
@@ -191,7 +198,20 @@ namespace audioCracker.Decoder
         {
             await Task.Run(() =>
             {
-                this.currentAnalyser.ConductFrameAnalysis(this.frames.ElementAt(currentFrame)).CopyTo(this.processedFrame, 0);
+                var result = this.currentAnalyser.ConductFrameAnalysis(this.frames.ElementAt(currentFrame));
+                this.processedFrame = new double[result.Item2.Count()];
+                result.Item2.CopyTo(this.processedFrame, 0);
+                if (result.Item1 != null)
+                {
+                    this.processedDomain = new double[result.Item1.Count()];
+                    result.Item1.CopyTo(this.processedDomain, 0);
+                }
+                else
+                {
+                    this.processedDomain = null;
+                }
+                
+
             });
 
             this.loaderManager.StopLoading();

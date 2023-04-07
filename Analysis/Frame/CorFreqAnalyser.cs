@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace audioCracker.Analysis
 {
-    public class CorFreqAnalyser : IFrameAnalyser
+    public class CorFreqAnalyser : FrameAnalyser
     {
 
         private int framesPerSecond;
@@ -19,10 +19,10 @@ namespace audioCracker.Analysis
         }
 
 
-        public double ConductAnalysis(IEnumerable<float> data)
+        public override double ConductAnalysis(IEnumerable<float> data)
         {
             var listedData = data.ToList();
-            if (!Voicing.IsVoicedFrame(listedData))
+            if (!Helpers.IsVoicedFrame(listedData))
             {
                 return 0;
             }
@@ -61,9 +61,5 @@ namespace audioCracker.Analysis
             return sum;
         }
 
-        public double[] ConductFrameAnalysis(IEnumerable<float> data)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -30,7 +30,7 @@ namespace audioCracker.Controls
         private ClipProcessor clipProcessor;
         private AnalysisManager analysisManager;
 
-        private int framesPerSecond;
+        public int framesPerSecond;
         private int clipsPerSecond;
 
         private int framesPerPlot;
@@ -65,21 +65,11 @@ namespace audioCracker.Controls
 
 
 
-            this.framesPerSecond = 25;
+            this.framesPerSecond = FrameMerger.frameLenInMs;
             this.clipsPerSecond =  this.framesPerSecond / this.clipProcessor.framesPerClip;
 
             this.currentPlot = null;
             this.IsLoaded = false;
-        }
-
-        public void SetForTime()
-        {
-            this.dataPlot.Plot.XLabel("Time [s]");
-        }
-
-        public void SetForFrequency()
-        {
-            this.dataPlot.Plot.XLabel("Frequency [Hz]");
         }
 
         public void EnableSilence(bool enable = true)
@@ -116,6 +106,7 @@ namespace audioCracker.Controls
         public void StartAnalysisFrames()
         {
             this.dataPlot.Plot.YLabel(this.analysisManager.GetYLabel());
+            this.dataPlot.Plot.XLabel(this.analysisManager.GetXLabel());
 
             var analysers = this.analysisManager.GetAnalyser();
 
@@ -143,6 +134,7 @@ namespace audioCracker.Controls
         private void StartAnalysisSingleFrame()
         {
             this.dataPlot.Plot.YLabel(this.analysisManager.GetYLabel());
+            this.dataPlot.Plot.XLabel(this.analysisManager.GetXLabel());
 
             var analysers = this.analysisManager.GetAnalyser();
 
@@ -175,20 +167,35 @@ namespace audioCracker.Controls
                 this.dataPlot.Plot.Remove(this.currentPlot);
             }
 
+            var domain = this.frameProcessor.GetProcessedDomain()?.ToArray();
             this.displayedY = this.frameProcessor.GetProcessedFrame().ToArray();
             this.currentPlot = this.dataPlot.Plot.AddSignal(
                 this.displayedY,
                 1
                 );
-
-            var frameLenInTicks = this.displayedY.Count();
-            var actualXTickPlot = Enumerable.Range(0, (frameLen) / 10).Select(t => (double)10 * t).Select(i => i * frameLenInTicks / frameLen);
-            var displayedXTickPlot = Enumerable.Range(0, (frameLen) / 10).Select(t => (double)10 * t);
-
-
             var valueFormat = "F0";
 
-            this.dataPlot.Plot.XAxis.ManualTickPositions(actualXTickPlot.ToArray(), displayedXTickPlot.Select(d => d.ToString(valueFormat)).ToArray());
+            if (domain == null)
+            {
+                var frameLenInTicks = this.displayedY.Count();
+                var actualXTickPlot = Enumerable.Range(0, (frameLen) / 10).Select(t => (double)10 * t).Select(i => i * frameLenInTicks / frameLen);
+                var displayedXTickPlot = Enumerable.Range(0, (frameLen) / 10).Select(t => (double)10 * t);
+
+
+                
+
+                this.dataPlot.Plot.XAxis.ManualTickPositions(actualXTickPlot.ToArray(), displayedXTickPlot.Select(d => d.ToString(valueFormat)).ToArray());
+            }
+            else
+            {
+                var xTicks = 10;
+                var actualXTickPlot = Enumerable.Range(0, xTicks).Select(t => (double)t * domain.Length / xTicks);
+                var displayedXTickPlot = Enumerable.Range(0, xTicks).Select(t => t * domain.Length / xTicks).Select(i => domain[i]);
+
+                this.dataPlot.Plot.XAxis.ManualTickPositions(actualXTickPlot.ToArray(), displayedXTickPlot.Select(d => d.ToString(valueFormat)).ToArray());
+            }
+
+            
 
             var yRange = this.frameProcessor.GetSingleFrameRange();
             var tickLength = (yRange.Item2 - yRange.Item1) / (yTicks - 1);
@@ -309,6 +316,7 @@ namespace audioCracker.Controls
             this.actualXSeconds = Enumerable.Range(0, secondsOnPlot).Select(i => (double)(xRange.Item1 + i * tickLength)).ToArray();
 
             this.dataPlot.Plot.XAxis.ManualTickPositions(this.actualXSeconds, this.displayedXSeconds.Select(d => d.ToString()).ToArray());
+            
         }
 
         private void RefreshPlotEvent(object sender, EventArgs e)
