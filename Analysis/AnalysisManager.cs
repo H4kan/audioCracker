@@ -31,7 +31,8 @@ namespace audioCracker.Analysis
                 new ("ZSTD", new ZCRAnalyser(), new StdAnalyser(), "ZSTD"),
                 new ("HZCRR",  new ZCRAnalyser(), new CutUpAnalyser(150.0), "HZCRR"),
                 new ("FFT Volume", new FFTVolumeAnalyser(), null, "Volume"),
-                new ("FFT Centroid", new FFTCentroidAnalyser(), null, "FC")
+                new ("FFT Centroid", new FFTCentroidAnalyser(), null, "FC"),
+                new ("Effective Bandwidth", new EffectiveBandwidth(), null, "BW")
             };
         }
 
