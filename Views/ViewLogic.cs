@@ -34,6 +34,11 @@ namespace audioCracker.Views
 
         public NumericUpDown lengthUpDown = new NumericUpDown();
 
+        public NumericUpDown minFreq;
+        public NumericUpDown maxFreq;
+
+        public Panel freqRangePanel;
+
         public virtual void setupUIComponents(Form form, Button playButton,
             Button stopButton, Button fileButton,
             ComboBox plotComboBox, Panel loadingPanel,
@@ -42,7 +47,9 @@ namespace audioCracker.Views
             NumericUpDown plotSecondsBox,
             Button savePlotBtn,
             Label durationLabel, Label currentLabel,
-            Label fileLabel, CheckBox silenceCheckBox)
+            Label fileLabel, CheckBox silenceCheckBox,
+            NumericUpDown minFreq, NumericUpDown maxFreq,
+            Panel freqRangePanel)
         {
 
             this.fileLabel = fileLabel;
@@ -56,9 +63,12 @@ namespace audioCracker.Views
             this.openFileDialog = new OpenFileDialog();
             this.openFileDialog.Filter = "wav files (*.wav)|*.wav|All files (*.*)|*.*;";
 
+            this.minFreq = minFreq;
+            this.maxFreq = maxFreq;
+
             if (this.analysisManager == null)
             {
-                this.analysisManager = new AnalysisManager();
+                this.analysisManager = new AnalysisManager(minFreq, maxFreq);
             }
 
             this.controlManager = new ControlManager(
@@ -88,6 +98,7 @@ namespace audioCracker.Views
             this.frameControlManager = new FrameControlManager(this.frameUpDown, this.frameSlider);
 
             this.lengthUpDown.Value = 40;
+            this.freqRangePanel = freqRangePanel;
 
     }
     }

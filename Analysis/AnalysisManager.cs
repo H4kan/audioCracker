@@ -15,7 +15,7 @@ namespace audioCracker.Analysis
 
         protected (string, FrameAnalyser, IClipAnalyser?, string) currentAnalyser;
 
-        public AnalysisManager()
+        public AnalysisManager(NumericUpDown minFreq, NumericUpDown maxFreq)
         {
             this.clipFrameAnalysers = new List<(string, FrameAnalyser, IClipAnalyser?, string)>()
             {
@@ -32,7 +32,11 @@ namespace audioCracker.Analysis
                 new ("HZCRR",  new ZCRAnalyser(), new CutUpAnalyser(150.0), "HZCRR"),
                 new ("FFT Volume", new FFTVolumeAnalyser(), null, "Volume"),
                 new ("FFT Centroid", new FFTCentroidAnalyser(), null, "FC"),
-                new ("Effective Bandwidth", new EffectiveBandwidth(), null, "BW")
+                new ("Effective Bandwidth", new EffectiveBandwidth(), null, "BW"),
+                new ("Band Energy", new BandEnergyAnalyser(minFreq, maxFreq), null, "BE"),
+                new ("Band Energy Ratio", new ERSBAnalyser(minFreq, maxFreq), null, "ERSB"),
+                new ("Spectral Flatness Measure", new SFMAnalyser(minFreq, maxFreq), null, "SFM"),
+                 new ("Spectral Crest Factor", new SCFAnalyser(minFreq, maxFreq), null, "SCF")
             };
         }
 

@@ -12,7 +12,7 @@ namespace audioCracker.Analysis
     public class FrameAnalysisManager : AnalysisManager
     {
 
-        public FrameAnalysisManager()
+        public FrameAnalysisManager(NumericUpDown minFreq, NumericUpDown maxFreq) : base(minFreq, maxFreq)
         {
             this.clipFrameAnalysers = new List<(string, FrameAnalyser, IClipAnalyser?, string)>()
             {

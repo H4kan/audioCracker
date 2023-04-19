@@ -32,7 +32,8 @@ namespace audioCracker
                 plotComboBox, loadingPanel, estimatedTimeLabel,
                 analysisButton, dataPlot, plotSecondsBox,
                 savePlotBtn, durationLabel, currentLabel,
-                fileLabel, silenceCheckBox);
+                fileLabel, silenceCheckBox, bottomFreqRange, upFreqRange,
+                freqRangePanel);
 
             this.frequencyViewLogic = new FrequencyViewLogic();
 
@@ -41,7 +42,8 @@ namespace audioCracker
                 plotComboBox2, loadingPanel2, estimatedTimeLabel2,
                 analysisButton2, dataPlot2, new NumericUpDown(),
                 savePlotBtn2, new Label(), new Label(),
-                fileLabel2, new CheckBox());
+                fileLabel2, new CheckBox(),
+                new NumericUpDown(), new NumericUpDown(), new Panel());
 
             frequencyViewLogic.setupFrequencyViewLogic(frameUpDown, frameSlider, lengthUpDown);
 
@@ -118,7 +120,7 @@ namespace audioCracker
                     this.currentLogic.fileLabel.Text = this.currentLogic.openFileDialog.SafeFileName;
                     this.currentLogic.filePath = this.currentLogic.openFileDialog.FileName;
                     FrameMerger.frameLenInMs = (int)this.currentLogic.lengthUpDown.Value;
-                    this.currentLogic.plotManager.framesPerSecond = 1000 / FrameMerger.frameLenInMs; 
+                    this.currentLogic.plotManager.framesPerSecond = 1000 / FrameMerger.frameLenInMs;
 
                     this.currentLogic.soundPlayer.Setup(this.currentLogic.openFileDialog.FileName);
 
@@ -165,15 +167,24 @@ namespace audioCracker
 #pragma warning disable CS8604 // Possible null reference argument.
                 this.currentLogic.analysisManager.ChangeAnalyser(this.currentLogic.plotComboBox.SelectedItem.ToString());
 #pragma warning restore CS8604 // Possible null reference argument.
-                if (this.currentLogic.analysisManager.GetAnalyser().Item2 != null)
+                if (this.currentLogic.plotComboBox.SelectedItem.ToString() == "Band Energy"
+                    || this.currentLogic.plotComboBox.SelectedItem.ToString() == "Band Energy Ratio"
+                    || this.currentLogic.plotComboBox.SelectedItem.ToString() == "Spectral Flatness Measure"
+                    || this.currentLogic.plotComboBox.SelectedItem.ToString() == "Spectral Crest Factor")
+                {
+                    this.currentLogic.freqRangePanel.Visible = true;
+                }
+                else if (this.currentLogic.analysisManager.GetAnalyser().Item2 != null)
                 {
                     this.currentLogic.silenceCheckBox.Checked = false;
                     this.currentLogic.silenceCheckBox.Enabled = false;
                     this.currentLogic.plotManager.EnableSilence(false);
+                    this.currentLogic.freqRangePanel.Visible = false;
                 }
                 else
                 {
                     this.currentLogic.silenceCheckBox.Enabled = true;
+                    this.currentLogic.freqRangePanel.Visible = false;
                 }
             }
         }
@@ -217,6 +228,16 @@ namespace audioCracker
         {
             this.currentLogic.frameSlider.Value = (int)this.currentLogic.frameUpDown.Value;
             this.currentLogic.plotManager.currentFrame = this.currentLogic.frameSlider.Value;
+        }
+
+        private void bottomFreqRange_ValueChanged(object sender, EventArgs e)
+        {
+            this.currentLogic.maxFreq.Minimum = this.currentLogic.minFreq.Value;
+        }
+
+        private void upFreqRange_ValueChanged(object sender, EventArgs e)
+        {
+            this.currentLogic.minFreq.Maximum = this.currentLogic.maxFreq.Value;
         }
     }
 }

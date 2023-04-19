@@ -119,7 +119,7 @@ namespace audioCracker.Decoder
 
         public (double, double) GetSingleFrameRange()
         {
-            return (0.0, FrameMerger.frameLenInMs);
+            return (this.processedFrame.Min(), this.processedFrame.Max());
         }
 
         public int GetEstimatedTime()

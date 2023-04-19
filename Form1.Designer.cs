@@ -33,6 +33,11 @@
             splitContainer1 = new SplitContainer();
             savePlotBtn = new Button();
             playPanel = new Panel();
+            freqRangePanel = new Panel();
+            label8 = new Label();
+            label7 = new Label();
+            bottomFreqRange = new NumericUpDown();
+            upFreqRange = new NumericUpDown();
             label1 = new Label();
             currentLabel = new Label();
             durationLabel = new Label();
@@ -72,6 +77,9 @@
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             playPanel.SuspendLayout();
+            freqRangePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bottomFreqRange).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)upFreqRange).BeginInit();
             ((System.ComponentModel.ISupportInitialize)plotSecondsBox).BeginInit();
             loadingPanel.SuspendLayout();
             viewControl.SuspendLayout();
@@ -147,7 +155,7 @@
             savePlotBtn.Enabled = false;
             savePlotBtn.FlatStyle = FlatStyle.Flat;
             savePlotBtn.ForeColor = SystemColors.HighlightText;
-            savePlotBtn.Location = new Point(126, 391);
+            savePlotBtn.Location = new Point(126, 439);
             savePlotBtn.Margin = new Padding(3, 2, 3, 2);
             savePlotBtn.Name = "savePlotBtn";
             savePlotBtn.Size = new Size(110, 38);
@@ -158,6 +166,7 @@
             // 
             // playPanel
             // 
+            playPanel.Controls.Add(freqRangePanel);
             playPanel.Controls.Add(label1);
             playPanel.Controls.Add(currentLabel);
             playPanel.Controls.Add(durationLabel);
@@ -167,8 +176,66 @@
             playPanel.Location = new Point(3, 96);
             playPanel.Margin = new Padding(3, 2, 3, 2);
             playPanel.Name = "playPanel";
-            playPanel.Size = new Size(387, 250);
+            playPanel.Size = new Size(387, 309);
             playPanel.TabIndex = 0;
+            // 
+            // freqRangePanel
+            // 
+            freqRangePanel.Controls.Add(label8);
+            freqRangePanel.Controls.Add(label7);
+            freqRangePanel.Controls.Add(bottomFreqRange);
+            freqRangePanel.Controls.Add(upFreqRange);
+            freqRangePanel.Location = new Point(12, 194);
+            freqRangePanel.Name = "freqRangePanel";
+            freqRangePanel.Size = new Size(359, 68);
+            freqRangePanel.TabIndex = 10;
+            freqRangePanel.Visible = false;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.ForeColor = SystemColors.Control;
+            label8.Location = new Point(165, 43);
+            label8.Name = "label8";
+            label8.Size = new Size(16, 21);
+            label8.TabIndex = 8;
+            label8.Text = "-";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = SystemColors.Control;
+            label7.Location = new Point(95, 11);
+            label7.Name = "label7";
+            label7.Size = new Size(161, 21);
+            label7.TabIndex = 7;
+            label7.Text = "Frequency range (Hz):";
+            // 
+            // bottomFreqRange
+            // 
+            bottomFreqRange.Location = new Point(23, 43);
+            bottomFreqRange.Margin = new Padding(3, 2, 3, 2);
+            bottomFreqRange.Maximum = new decimal(new int[] { 9000, 0, 0, 0 });
+            bottomFreqRange.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            bottomFreqRange.Name = "bottomFreqRange";
+            bottomFreqRange.Size = new Size(131, 23);
+            bottomFreqRange.TabIndex = 5;
+            bottomFreqRange.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            bottomFreqRange.ValueChanged += bottomFreqRange_ValueChanged;
+            // 
+            // upFreqRange
+            // 
+            upFreqRange.Location = new Point(187, 43);
+            upFreqRange.Margin = new Padding(3, 2, 3, 2);
+            upFreqRange.Maximum = new decimal(new int[] { 9000, 0, 0, 0 });
+            upFreqRange.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            upFreqRange.Name = "upFreqRange";
+            upFreqRange.Size = new Size(131, 23);
+            upFreqRange.TabIndex = 6;
+            upFreqRange.Value = new decimal(new int[] { 2000, 0, 0, 0 });
+            upFreqRange.ValueChanged += upFreqRange_ValueChanged;
             // 
             // label1
             // 
@@ -436,7 +503,7 @@
             savePlotBtn2.Enabled = false;
             savePlotBtn2.FlatStyle = FlatStyle.Flat;
             savePlotBtn2.ForeColor = SystemColors.HighlightText;
-            savePlotBtn2.Location = new Point(126, 391);
+            savePlotBtn2.Location = new Point(121, 433);
             savePlotBtn2.Margin = new Padding(3, 2, 3, 2);
             savePlotBtn2.Name = "savePlotBtn2";
             savePlotBtn2.Size = new Size(110, 38);
@@ -454,7 +521,7 @@
             panel1.Location = new Point(3, 157);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(387, 189);
+            panel1.Size = new Size(387, 243);
             panel1.TabIndex = 0;
             // 
             // frameUpDown
@@ -609,6 +676,10 @@
             splitContainer1.ResumeLayout(false);
             playPanel.ResumeLayout(false);
             playPanel.PerformLayout();
+            freqRangePanel.ResumeLayout(false);
+            freqRangePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bottomFreqRange).EndInit();
+            ((System.ComponentModel.ISupportInitialize)upFreqRange).EndInit();
             ((System.ComponentModel.ISupportInitialize)plotSecondsBox).EndInit();
             loadingPanel.ResumeLayout(false);
             loadingPanel.PerformLayout();
@@ -671,5 +742,10 @@
         private Label label6;
         private Label label5;
         private NumericUpDown lengthUpDown;
+        private Panel freqRangePanel;
+        private Label label8;
+        private Label label7;
+        private NumericUpDown bottomFreqRange;
+        private NumericUpDown upFreqRange;
     }
 }

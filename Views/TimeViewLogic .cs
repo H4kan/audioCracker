@@ -20,12 +20,13 @@ namespace audioCracker.Views
             NumericUpDown plotSecondsBox,
             Button savePlotBtn,
             Label durationLabel, Label currentLabel,
-            Label fileLabel, CheckBox silenceCheckBox)
+            Label fileLabel, CheckBox silenceCheckBox,
+            NumericUpDown minFreq, NumericUpDown maxFreq, Panel freqRangePanel)
             
         {
             base.setupUIComponents(form, playButton, stopButton,fileButton, plotComboBox, loadingPanel,
                 estimatedTimeLabel, analysisButton, dataPlot, plotSecondsBox, savePlotBtn, durationLabel, currentLabel, 
-                fileLabel, silenceCheckBox);
+                fileLabel, silenceCheckBox, minFreq, maxFreq, freqRangePanel);
 
         }
     }
