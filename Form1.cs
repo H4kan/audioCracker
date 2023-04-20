@@ -239,5 +239,20 @@ namespace audioCracker
         {
             this.currentLogic.minFreq.Maximum = this.currentLogic.maxFreq.Value;
         }
+
+        private void windowOffsetUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            this.setWindowChange();
+        }
+
+        private void windowIntervalUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            this.setWindowChange();
+        }
+
+        public void setWindowChange()
+        {
+            this.currentLogic.windowConfiguration.SetWindow((int)this.windowOffsetUpDown.Value, (int)this.windowIntervalUpDown.Value);
+        }
     }
 }

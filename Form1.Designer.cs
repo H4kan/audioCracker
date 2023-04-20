@@ -61,6 +61,10 @@
             this.lengthUpDown = new System.Windows.Forms.NumericUpDown();
             this.savePlotBtn2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.windowIntervalUpDown = new System.Windows.Forms.NumericUpDown();
+            this.windowOffsetUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.frameUpDown = new System.Windows.Forms.NumericUpDown();
             this.frameLabel = new System.Windows.Forms.Label();
             this.frameSlider = new System.Windows.Forms.TrackBar();
@@ -91,6 +95,8 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lengthUpDown)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.windowIntervalUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.windowOffsetUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).BeginInit();
             this.loadingPanel2.SuspendLayout();
@@ -117,7 +123,7 @@
             this.fileLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fileLabel.Location = new System.Drawing.Point(99, 29);
             this.fileLabel.Name = "fileLabel";
-            this.fileLabel.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.fileLabel.Padding = new System.Windows.Forms.Padding(5);
             this.fileLabel.Size = new System.Drawing.Size(207, 37);
             this.fileLabel.TabIndex = 1;
             this.fileLabel.Text = "File name";
@@ -460,7 +466,7 @@
             this.timePage.Controls.Add(this.splitContainer1);
             this.timePage.Location = new System.Drawing.Point(4, 29);
             this.timePage.Name = "timePage";
-            this.timePage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.timePage.Padding = new System.Windows.Forms.Padding(3);
             this.timePage.Size = new System.Drawing.Size(1398, 698);
             this.timePage.TabIndex = 0;
             this.timePage.Text = "Time";
@@ -471,7 +477,7 @@
             this.frequencyPage.Controls.Add(this.splitContainer2);
             this.frequencyPage.Location = new System.Drawing.Point(4, 29);
             this.frequencyPage.Name = "frequencyPage";
-            this.frequencyPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.frequencyPage.Padding = new System.Windows.Forms.Padding(3);
             this.frequencyPage.Size = new System.Drawing.Size(1398, 698);
             this.frequencyPage.TabIndex = 1;
             this.frequencyPage.Text = "Frame";
@@ -544,6 +550,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.windowIntervalUpDown);
+            this.panel1.Controls.Add(this.windowOffsetUpDown);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.frameUpDown);
             this.panel1.Controls.Add(this.frameLabel);
             this.panel1.Controls.Add(this.frameSlider);
@@ -552,6 +562,71 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(442, 324);
             this.panel1.TabIndex = 0;
+            // 
+            // windowIntervalUpDown
+            // 
+            this.windowIntervalUpDown.Enabled = false;
+            this.windowIntervalUpDown.Location = new System.Drawing.Point(192, 263);
+            this.windowIntervalUpDown.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.windowIntervalUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.windowIntervalUpDown.Name = "windowIntervalUpDown";
+            this.windowIntervalUpDown.Size = new System.Drawing.Size(150, 27);
+            this.windowIntervalUpDown.TabIndex = 8;
+            this.windowIntervalUpDown.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.windowIntervalUpDown.ValueChanged += new System.EventHandler(this.windowIntervalUpDown_ValueChanged);
+            // 
+            // windowOffsetUpDown
+            // 
+            this.windowOffsetUpDown.Enabled = false;
+            this.windowOffsetUpDown.Location = new System.Drawing.Point(192, 221);
+            this.windowOffsetUpDown.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.windowOffsetUpDown.Name = "windowOffsetUpDown";
+            this.windowOffsetUpDown.Size = new System.Drawing.Size(150, 27);
+            this.windowOffsetUpDown.TabIndex = 7;
+            this.windowOffsetUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.windowOffsetUpDown.ValueChanged += new System.EventHandler(this.windowOffsetUpDown_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.ForeColor = System.Drawing.SystemColors.Control;
+            this.label10.Location = new System.Drawing.Point(23, 258);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(159, 28);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Window interval:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.ForeColor = System.Drawing.SystemColors.Control;
+            this.label9.Location = new System.Drawing.Point(39, 216);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(143, 28);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Window offset:";
             // 
             // frameUpDown
             // 
@@ -603,7 +678,7 @@
             this.fileLabel2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fileLabel2.Location = new System.Drawing.Point(112, 37);
             this.fileLabel2.Name = "fileLabel2";
-            this.fileLabel2.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.fileLabel2.Padding = new System.Windows.Forms.Padding(5);
             this.fileLabel2.Size = new System.Drawing.Size(207, 37);
             this.fileLabel2.TabIndex = 1;
             this.fileLabel2.Text = "File name";
@@ -726,6 +801,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lengthUpDown)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.windowIntervalUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.windowOffsetUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).EndInit();
             this.loadingPanel2.ResumeLayout(false);
@@ -780,5 +857,9 @@
         private Label label7;
         private NumericUpDown bottomFreqRange;
         private NumericUpDown upFreqRange;
+        private NumericUpDown windowIntervalUpDown;
+        private NumericUpDown windowOffsetUpDown;
+        private Label label10;
+        private Label label9;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using audioCracker.Analysis;
+using audioCracker.Analysis.Frame;
 using audioCracker.Controls;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,8 @@ namespace audioCracker.Views
         public NumericUpDown maxFreq;
 
         public Panel freqRangePanel;
+
+        public WindowConfiguration windowConfiguration = new WindowConfiguration();
 
         public virtual void setupUIComponents(Form form, Button playButton,
             Button stopButton, Button fileButton,
