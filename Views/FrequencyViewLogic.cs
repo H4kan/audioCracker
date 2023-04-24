@@ -25,7 +25,7 @@ namespace audioCracker.Views
             Panel freqRangePanel)
             
         {
-            this.analysisManager = new FrameAnalysisManager(minFreq, maxFreq);
+            this.analysisManager = new FrameAnalysisManager(minFreq, maxFreq, windowConfiguration);
 
             base.setupUIComponents(form, playButton, stopButton,fileButton, plotComboBox, loadingPanel,
                 estimatedTimeLabel, analysisButton, dataPlot, plotSecondsBox, savePlotBtn, durationLabel, currentLabel, 

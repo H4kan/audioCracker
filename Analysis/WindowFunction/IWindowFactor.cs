@@ -9,6 +9,6 @@ namespace audioCracker.Analysis.WindowFunction
 {
     public interface IWindowFactor
     {
-        double GetScaleFactor(int frameOffset, int frameInterval, int frame);
+        float GetScaleFactor(int frameOffset, int frameInterval, int frame);
     }
 }

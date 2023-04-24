@@ -120,6 +120,10 @@ namespace audioCracker
                     this.currentLogic.fileLabel.Text = this.currentLogic.openFileDialog.SafeFileName;
                     this.currentLogic.filePath = this.currentLogic.openFileDialog.FileName;
                     FrameMerger.frameLenInMs = (int)this.currentLogic.lengthUpDown.Value;
+                    this.setWindowChange();
+                    this.windowOffsetUpDown.Enabled = true;
+                    this.windowIntervalUpDown.Enabled = true;
+
                     this.currentLogic.plotManager.framesPerSecond = 1000 / FrameMerger.frameLenInMs;
 
                     this.currentLogic.soundPlayer.Setup(this.currentLogic.openFileDialog.FileName);
@@ -252,6 +256,13 @@ namespace audioCracker
 
         public void setWindowChange()
         {
+            if (FrameMerger.frameLenInMs < (int)this.windowOffsetUpDown.Value + (int)this.windowIntervalUpDown.Value)
+            {
+                this.windowOffsetUpDown.Value = Math.Min(FrameMerger.frameLenInMs - 1, this.windowOffsetUpDown.Value);
+                this.windowIntervalUpDown.Value = FrameMerger.frameLenInMs - (int)this.windowOffsetUpDown.Value;
+                this.windowIntervalUpDown.Maximum = FrameMerger.frameLenInMs - (int)this.windowOffsetUpDown.Value;
+                this.windowOffsetUpDown.Maximum = FrameMerger.frameLenInMs;
+            }
             this.currentLogic.windowConfiguration.SetWindow((int)this.windowOffsetUpDown.Value, (int)this.windowIntervalUpDown.Value);
         }
     }

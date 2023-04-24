@@ -12,7 +12,7 @@ namespace audioCracker.Analysis.Frame
 
         public override (double[]?, double[]) ConductFrameAnalysis(IEnumerable<float> data)
         {
-            return (null, data.Select(d => (double)d).ToArray());
+            return (null, data.Select(d => (double)(d)).ToArray());
         }
     }
 }
