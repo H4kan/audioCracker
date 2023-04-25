@@ -14,12 +14,12 @@ namespace audioCracker.Analysis
     {
 
         public FrameAnalysisManager(NumericUpDown minFreq, 
-            NumericUpDown maxFreq, WindowConfiguration configuration) : base(minFreq, maxFreq)
+            NumericUpDown maxFreq, WindowConfiguration configuration, MaxFrequencyResolver frequencyResolver) : base(minFreq, maxFreq)
         {
             this.clipFrameAnalysers = new List<(string, FrameAnalyser, IClipAnalyser?, string)>()
             {
                 new ("Signal", new ForwardAnalyser(), null, "Amplitudes"),
-                new ("Frequency spectrum", new FFTSpectrumAnalyser(), null, "Amplitudes"),
+                new ("Frequency spectrum", new FFTSpectrumAnalyser(frequencyResolver), null, "Amplitudes"),
                 new ("Signal (rectangle)", new RectangleWindowAnalyser(
                     new ForwardAnalyser(),
                     configuration)
@@ -41,23 +41,23 @@ namespace audioCracker.Analysis
                     configuration)
                     , null, "Amplitudes"),
                 new ("Frequency spectrum (rectangle)", new RectangleWindowAnalyser(
-                    new FFTSpectrumAnalyser(),
+                    new FFTSpectrumAnalyser(frequencyResolver),
                     configuration)
                     , null, "Amplitudes"),
                 new ("Frequency spectrum (triangle)", new TriangleWindowAnalyser(
-                    new FFTSpectrumAnalyser(),
+                    new FFTSpectrumAnalyser(frequencyResolver),
                     configuration)
                     , null, "Amplitudes"),
                 new ("Frequency spectrum (Hann)", new HannWindowAnalyser(
-                    new FFTSpectrumAnalyser(),
+                    new FFTSpectrumAnalyser(frequencyResolver),
                     configuration)
                     , null, "Amplitudes"),
                 new ("Frequency spectrum (Hamming)", new HammingWindowAnalyser(
-                    new FFTSpectrumAnalyser(),
+                    new FFTSpectrumAnalyser(frequencyResolver),
                     configuration)
                     , null, "Amplitudes"),
                 new ("Frequency spectrum (Blackman)", new BlackmanWindowAnalyser(
-                    new FFTSpectrumAnalyser(),
+                    new FFTSpectrumAnalyser(frequencyResolver),
                     configuration)
                     , null, "Amplitudes")
             };

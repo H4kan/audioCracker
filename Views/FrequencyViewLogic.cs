@@ -22,14 +22,15 @@ namespace audioCracker.Views
             Label durationLabel, Label currentLabel,
             Label fileLabel, CheckBox silenceCheckBox,
             NumericUpDown minFreq, NumericUpDown maxFreq,
-            Panel freqRangePanel)
+            Panel freqRangePanel,
+            NumericUpDown maxFreqSpectrumUpDown)
             
         {
-            this.analysisManager = new FrameAnalysisManager(minFreq, maxFreq, windowConfiguration);
+            this.analysisManager = new FrameAnalysisManager(minFreq, maxFreq, this.windowConfiguration, new Analysis.Frequency.MaxFrequencyResolver(maxFreqSpectrumUpDown));
 
             base.setupUIComponents(form, playButton, stopButton,fileButton, plotComboBox, loadingPanel,
                 estimatedTimeLabel, analysisButton, dataPlot, plotSecondsBox, savePlotBtn, durationLabel, currentLabel, 
-                fileLabel, silenceCheckBox, minFreq, maxFreq, freqRangePanel);
+                fileLabel, silenceCheckBox, minFreq, maxFreq, freqRangePanel, maxFreqSpectrumUpDown);
          
         }
 

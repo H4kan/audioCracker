@@ -52,7 +52,8 @@ namespace audioCracker.Views
             Label durationLabel, Label currentLabel,
             Label fileLabel, CheckBox silenceCheckBox,
             NumericUpDown minFreq, NumericUpDown maxFreq,
-            Panel freqRangePanel)
+            Panel freqRangePanel,
+            NumericUpDown maxFreqSpectrumUpDown)
         {
 
             this.fileLabel = fileLabel;

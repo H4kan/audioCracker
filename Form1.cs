@@ -33,7 +33,7 @@ namespace audioCracker
                 analysisButton, dataPlot, plotSecondsBox,
                 savePlotBtn, durationLabel, currentLabel,
                 fileLabel, silenceCheckBox, bottomFreqRange, upFreqRange,
-                freqRangePanel);
+                freqRangePanel, new NumericUpDown());
 
             this.frequencyViewLogic = new FrequencyViewLogic();
 
@@ -43,7 +43,8 @@ namespace audioCracker
                 analysisButton2, dataPlot2, new NumericUpDown(),
                 savePlotBtn2, new Label(), new Label(),
                 fileLabel2, new CheckBox(),
-                new NumericUpDown(), new NumericUpDown(), new Panel());
+                new NumericUpDown(), new NumericUpDown(), new Panel(),
+                new NumericUpDown());
 
             frequencyViewLogic.setupFrequencyViewLogic(frameUpDown, frameSlider, lengthUpDown);
 
