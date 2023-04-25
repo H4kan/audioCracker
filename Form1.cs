@@ -44,7 +44,7 @@ namespace audioCracker
                 savePlotBtn2, new Label(), new Label(),
                 fileLabel2, new CheckBox(),
                 new NumericUpDown(), new NumericUpDown(), new Panel(),
-                new NumericUpDown());
+                this.maxFreqUpDown);
 
             frequencyViewLogic.setupFrequencyViewLogic(frameUpDown, frameSlider, lengthUpDown);
 

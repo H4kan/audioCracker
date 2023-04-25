@@ -11,6 +11,8 @@ namespace audioCracker.Analysis.Frame
         private IWindowFactor factor;
         private FrameAnalyser modelSignal;
 
+        public override bool FrequencyDomain => this.modelSignal.FrequencyDomain;
+
         public WindowAnalyser(FrameAnalyser modelSignal, 
             WindowConfiguration configuration,
             IWindowFactor windowFactor) { 

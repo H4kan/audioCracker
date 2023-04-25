@@ -76,6 +76,8 @@
             this.analysisButton2 = new System.Windows.Forms.Button();
             this.dataPlot2 = new ScottPlot.FormsPlot();
             this.plotComboBox2 = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.maxFreqUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -100,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).BeginInit();
             this.loadingPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxFreqUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // fileButton
@@ -497,6 +500,8 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.maxFreqUpDown);
+            this.splitContainer2.Panel2.Controls.Add(this.label11);
             this.splitContainer2.Panel2.Controls.Add(this.loadingPanel2);
             this.splitContainer2.Panel2.Controls.Add(this.analysisButton2);
             this.splitContainer2.Panel2.Controls.Add(this.dataPlot2);
@@ -767,6 +772,40 @@
             this.plotComboBox2.TabIndex = 1;
             this.plotComboBox2.SelectedIndexChanged += new System.EventHandler(this.plotComboBox2_SelectedIndexChanged);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.SystemColors.Control;
+            this.label11.Location = new System.Drawing.Point(455, 31);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(109, 20);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Max frequency:";
+            // 
+            // maxFreqUpDown
+            // 
+            this.maxFreqUpDown.Enabled = false;
+            this.maxFreqUpDown.Location = new System.Drawing.Point(570, 29);
+            this.maxFreqUpDown.Maximum = new decimal(new int[] {
+            9000,
+            0,
+            0,
+            0});
+            this.maxFreqUpDown.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.maxFreqUpDown.Name = "maxFreqUpDown";
+            this.maxFreqUpDown.Size = new System.Drawing.Size(118, 27);
+            this.maxFreqUpDown.TabIndex = 9;
+            this.maxFreqUpDown.Value = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -796,6 +835,7 @@
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lengthUpDown)).EndInit();
@@ -807,6 +847,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.frameSlider)).EndInit();
             this.loadingPanel2.ResumeLayout(false);
             this.loadingPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxFreqUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -861,5 +902,7 @@
         private NumericUpDown windowOffsetUpDown;
         private Label label10;
         private Label label9;
+        private NumericUpDown maxFreqUpDown;
+        private Label label11;
     }
 }

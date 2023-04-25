@@ -18,6 +18,6 @@ namespace audioCracker.Analysis
             return (data.Select(d => (double)d).ToArray(), data.Select(d => (double)d).ToArray());
         }
 
-        public virtual bool FrequencyDomain {  get {  return false; } }
+        public virtual bool FrequencyDomain { get { return false; } }
     }
 }
